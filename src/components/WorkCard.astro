@@ -5,9 +5,10 @@ interface Props {
     work: CollectionEntry<'works'>
 }
 const { work } = Astro.props
-const path = "/src/assets/images/" + work.data.thumbnail
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}')
-const image = await images[path]()
+const matchedKey = Object.keys(images).find(key => key.endsWith('/' + work.data.thumbnail))
+if (!matchedKey) throw new Error(`Thumbnail not found: ${work.data.thumbnail}`)
+const image = await images[matchedKey]()
 const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
 ---
 
