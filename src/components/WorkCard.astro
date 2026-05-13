@@ -7,11 +7,12 @@ interface Props {
 const { work } = Astro.props
 const path = "/src/assets/images/" + work.data.thumbnail
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}')
+const image = await images[path]()
 const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
 ---
 
 <div style={`--color: ${color}`} class="project-container">
-    <Image src={images[path]()} alt="" style="width: 100%; height: auto"/>
+    <Image src={image.default} alt="" style="width: 100%; height: auto"/>
     <h3>{work.data.title}</h3>
     <p>{work.data.summary}</p>
     <a href="" class={"project-button"}>Learn More</a>
