@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+interface Props {
+    work: CollectionEntry<'works'>
+}
+const { work } = Astro.props
+const path = "/src/assets/images/" + work.data.thumbnail
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}')
+const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
+---
+
+<div style={`--color: ${color}`} class="project-container">
+    <Image src={images[path]()} alt="" style="width: 100%; height: auto"/>
+    <h3>{work.data.title}</h3>
+    <p>{work.data.summary}</p>
+    <a href="" class={"project-button"}>Learn More</a>
+</div>
+
+<style>
+.project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 1%;
+    padding: 2em;
+    height: 100%;
+    max-width: 25em;
+    min-width: 25em;
+    background-color: rgba(var(--color), 0.2)
+}
+
+.project-container h3 {
+    padding: 1em 0em;
+}
+
+.project-container p {
+    font-size: 1.0rem;
+    margin-bottom: 1em;
+}
+
+.project-container img {
+    aspect-ratio: 1 / 1;
+    width: 90%;
+    height: width;
+    object-fit: contain;
+    object-position: center;
+}
+
+.project-button {
+    display: inline-block;
+    margin-right: auto;
+    text-decoration: none;
+    color:white;
+    margin-top: auto;
+    padding: .75em 1.25em;
+    border-radius: 0.25em;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: Roboto, 'TikTok Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(var(--color), 0.5)
+}
+</style>
