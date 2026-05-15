@@ -16,10 +16,70 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
     <Image src={image.default} alt="" style="width: 100%; height: auto"/>
     <h3>{work.data.title}</h3>
     <p>{work.data.summary}</p>
-    <a href="" class={"project-button"}>Learn More</a>
+    <button class="learn-button" id={`${work.id}-learn`}>Learn More</a>
 </div>
+<dialog class="dialogue" id=`${work.id}-dialogue`>
+    <button class="close-button" id=`${work.id}-close`>
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M11.03 8.53a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06l-2.72-2.72H18a.75.75 0 0 0 0-1.5H8.31z" />
+        </svg>
+    </button>
+    <div class="description">
+        <h3>{work.data.title}</h3>
+        <p>{work.data.summary}</p>
+    </div>
+</dialog>
+
+<script define:vars={{work}}>
+    const dialogue = document.getElementById(`${work.id}-dialogue`)
+    const openDialogue = document.getElementById(`${work.id}-learn`)
+    const closeDialogue = document.getElementById(`${work.id}-close`)
+    openDialogue.addEventListener('click', () => {
+        dialogue.showModal();
+    })
+    closeDialogue.addEventListener('click', () => {
+        dialogue.close();
+    })
+    dialogue.addEventListener('click', (e) => {
+        const bounds = dialogue.getBoundingClientRect();
+        if (e.clientX < bounds.left || e.clientX > bounds.right ||
+            e.clientY < bounds.top || e.clientY > bounds.bottom)
+            dialogue.close();
+    })
+</script>
 
 <style>
+.dialogue::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+.dialogue {
+    overflow-y: auto;
+    align-self: center;
+    justify-self: center;
+    width: 50rem;
+    height: 40rem;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 1%;
+    color:white;
+    border: none;
+}
+.description {
+    padding: 2em;
+    line-height: 1.5em;
+}
+.close-button{
+    aspect-ratio: 1 / 1;
+    width: 2em;
+    color: white;
+    background: none;
+    border: none;
+    position: relative;
+    left: 1em;
+    top: 1em;
+    cursor: pointer;
+}
 .project-container {
     display: flex;
     flex-direction: column;
@@ -49,10 +109,11 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
     object-position: center;
 }
 
-.project-button {
+.learn-button {
     display: inline-block;
     margin-right: auto;
     text-decoration: none;
+    border: none;
     color:white;
     margin-top: auto;
     padding: .75em 1.25em;
@@ -60,6 +121,7 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
     font-size: 0.9rem;
     font-weight: 400;
     font-family: Roboto, 'TikTok Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgba(var(--color), 0.5)
+    background-color: rgba(var(--color), 0.5);
+    cursor: pointer;
 }
 </style>
