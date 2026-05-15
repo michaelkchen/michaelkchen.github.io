@@ -57,7 +57,7 @@ import { Content as Bio } from '../content/bio.md'
                 <Bio />
                 <a href="#software" class="cta-button" style="background-color: rgba(var(--color1), 0.5);">Software</a>
                 <a href="#art" class="cta-button" style="background-color: rgba(var(--color2), 0.5);">Art/Media</a>
-                <a href="" class="cta-button" style="background-color: rgba(var(--color3), 0.5);">Resume</a>
+                <a href="resume.pdf" class="cta-button" style="background-color: rgba(var(--color3), 0.5);" target="_blank">Resume</a>
             </div>
         </div>
     </header>
@@ -81,8 +81,15 @@ import { Content as Bio } from '../content/bio.md'
         </div>
     </section>
 
+    <a href="#" class="return">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
+            <path d="M0 0h1024v1024H0z" fill="none" />
+            <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
+        </svg>
+        <h1>Back to Top!</h1>
+    </a>
     <footer>
-        <a href="#" class="cta-button" style="background-color: rgba(255, 255, 255, 0.05);">Back to Top!</a>
+        <p>© Michael Chen 2026</p>
     </footer>
 </body>
 </Layout>
@@ -96,7 +103,7 @@ import { Content as Bio } from '../content/bio.md'
         --color1: 34, 85, 140;
         --color2: 48, 34, 140;
         --color3: 129, 34, 140;
-        --footer-color: color-mix(in srgb, var(--base-color), white 5%);
+        --footer-color: color-mix(in srgb, var(--base-color), white 2%);
         --text-color: rgb(255, 255, 255);
         --hover-color: #cdc4ff
     }
@@ -108,13 +115,12 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         background-color: var(--footer-color);
-        width: 100%;
-        margin-top: 5em;
-        padding: 3em 0;
+        padding: 3em
+    }
+
+    footer p {
+        color: gray;
     }
 
     html {
@@ -177,6 +183,26 @@ import { Content as Bio } from '../content/bio.md'
     .end {
         margin-bottom: 0em !important;
         padding-bottom: 0em;
+    }
+
+    .return {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 5%);
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        margin-top: 5em;
+        gap: 1em;
+        padding: 3em 0;
+        
+    }
+
+    .return h1 {
+        font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: lighter;
     }
 
     .flex-container {
