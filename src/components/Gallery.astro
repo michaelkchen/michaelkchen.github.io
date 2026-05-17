@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 interface Props {
     path: string,
     width: string
@@ -10,8 +11,8 @@ const images = Object.keys(data).filter(image => image.startsWith(path))
 ---
 
 <div class="gallery">
-    {images.map(image => (
-        <img src={image} alt=""/>
+    {images.map(path => (
+        <Image src={data[path].default} alt="" width={data[path].default.width} height={data[path].default.height}/> 
     ))}
 </div>
 
@@ -26,6 +27,7 @@ const images = Object.keys(data).filter(image => image.startsWith(path))
     }
     .gallery img {
         width: var(--width);
+        height: auto;
         border-radius: 1%;
     }
 </style>
