@@ -10,6 +10,7 @@ import { getCollection } from 'astro:content';
 import { getEntry, render } from 'astro:content';
 
 interface WorkCard {
+    priority: number,
     title: string,
     type: string,
     summary: string,
@@ -20,6 +21,9 @@ const WORK_SWE = "swe"
 const WORK_ART = "art"
 
 const works = await getCollection('works')
+works.sort((workA, workB) => {
+    return workA.data.priority - workB.data.priority
+})
 import { Content as Bio } from '../content/bio.md'
 ---
 
@@ -126,10 +130,15 @@ import { Content as Bio } from '../content/bio.md'
     html {
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
+        scrollbar-gutter: stable;
     }
 
     body {
         background-color: var(--base-color);
+    }
+
+    body:has(dialog[open]) {
+        overflow: hidden;
     }
 
     h1, h2, h3 {

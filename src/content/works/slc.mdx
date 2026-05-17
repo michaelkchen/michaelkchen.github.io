@@ -1,0 +1,17 @@
+---
+priority: 2
+thumbnail: "cal intervention 1.png"
+title: "SLC - Stanford Snyder Lab Research"
+type: "swe"
+summary: "A research study with the goal to analyze the efficacy and safety of an experimental Chinese herbal medicine on long COVID, based on a study involving wearable watch data from 19 patients over 8 weeks."
+---
+import Gallery from '../../components/Gallery.astro'
+
+
+I conducted research under the leadership of <a href="https://www.researchgate.net/profile/Jingyuan-Luo-4">Jingyuan Luo</a> from Hong Kong Baptist University's School of Chinese Medicine, and <a href="https://med.stanford.edu/profiles/taowang9" target="_blank">Dr. Tao Wang</a> from the Stanford Snyder Lab regarding the utilization of Shenlingcao oral liquid (SLC) as a method to treat long COVID. There were 20 gigabytes of wearable watch data from 19 patients over 8 weeks, where each patient was double-blindly selected into an SLC or placebo group as well as labeled as a responder or nonresponder.
+<br></br>
+I ran my own scripts on the data for the first 4 weeks, performing feature extraction with **tsfresh** and **catch22**, and generating PCA plots with **scikit-learn** and **Matplotlib** based on those features. The metrics I analyzed were calories, heartrate variation (HRV), total sleep, body temperature, and steps. As an example, the week 4 PCA plots looked something like this:
+<br></br>
+<Gallery path="/src/assets/images/slc" width="30%"/>
+<br></br>
+As there are no trends in the plots, the conclusion of no causation from SLC on patients with long COVID was drawn from this set of variables.

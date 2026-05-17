@@ -1,0 +1,16 @@
+---
+priority: 1
+thumbnail: "smartglasses.jpg"
+title: "SeeFood - Stanford Snyder Lab Research"
+type: "swe"
+summary: "A research study aiming to utilize AI photo-recognition to identify ingredients and macronutrients for food logging. My focus was in utilizing Python scripting with OpenAI's API combined with Meta Ray-Ban Smartglasses for image capturing."
+---
+I joined several research teams of graduate students and professors from Stanford University, the University of Bergen, the Diabetes Technology Society, Google Research, and the Diabetes Research Institute, Mills-Peninsula Medical Center to collaborate on a study comparing SnapCalorie and GPT-4.0-mini on their ability to recognize incredients and macronutrients from various photos.
+<br></br>
+We had two datasets of images, one with 15 photographs of real-world meals taken from a Samsung S10 (Dataset A), and one with 20 photograps taken with an iPhone. Nutritional values were verified either via professional labeling or calculated from raw ingredient weights if the meal was homemade. We overall concluded that GPT-4.0-mini outperformed SnapCalorie on ingredient and macronutrient identification, yet both have low accuracy, concluding that significant improvements must be made for this method of food logging to be viable.
+<br></br>
+This study was presented at the Diabetes Technology Meeting. If you would like to read the full abstract, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12830349/#section112-19322968251411624" target="_blank">click here</a>.
+<br></br>
+Under the mentorship of <a href="https://med.stanford.edu/profiles/taowang9" target="_blank">Dr. Tao Wang</a>, I lead my own focus involving communcation between Meta Ray-Ban smartglasses and ChatGPT. Usually, the smartglasses can only communicate with the Meta AI app. However, with some trickery with Facebook Messager, <a href="https://github.com/dcrebbin/meta-glasses-api" target="_blank">this script</a> that we found was able to use a group chat as an intermediate for this communication.
+<br></br>
+I also experimented with the glasses themselves as a capturing method, testing their consistency, user experience, and how well ChatGPT performs with the images that are taken. Using 35 images of real-world meals captured from the glasses, I wrote a Python script to feed each image to ChatGPT in bulk and generated <a href="seefood.pdf" target="_blank">this spreadsheet</a> of the responses.

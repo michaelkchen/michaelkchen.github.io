@@ -1,0 +1,31 @@
+---
+interface Props {
+    path: string,
+    width: string
+}
+const { path, width } = Astro.props
+const data = import.meta.glob<{ default: ImageMetadata }>(`/src/assets/**/*.{jpeg,jpg,JPG,JPEG,png,PNG,gif}`, { eager: true })
+const images = Object.keys(data).filter(image => image.startsWith(path))
+//const width = (100 / Math.ceil(Math.sqrt(images.length)))
+---
+
+<div class="gallery">
+    {images.map(image => (
+        <img src={image} alt=""/>
+    ))}
+</div>
+
+<style define:vars={{width: `${width}`}}>
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 0.5em;
+    }
+    .gallery img {
+        width: var(--width);
+        border-radius: 1%;
+    }
+</style>

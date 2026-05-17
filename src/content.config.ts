@@ -3,8 +3,9 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod"
 
 const works = defineCollection({
-    loader: glob({ base: 'src/content/works', pattern:'*.md' }),
+    loader: glob({ base: 'src/content/works', pattern:'*.mdx' }),
     schema: z.object({
+        priority: z.int(),
         thumbnail: z.string(),
         title: z.string(),
         type: z.string(),
