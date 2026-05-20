@@ -53,6 +53,15 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
 </script>
 
 <style>
+    
+    :global(.dialogue a:link) {
+        color: var(--link-color)
+    }
+
+    :global(.dialogue a:visited) {
+        color: var(--link-color)
+    }
+
     .dialogue::backdrop {
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(2px);
