@@ -112,13 +112,25 @@ import { Content as Bio } from '../content/bio.md'
         --text-color: rgb(255, 255, 255);
         --text-color2: rgb(173, 173, 173);
         --link-color: rgb(33, 103, 255);
-        --hover-color: #cdc4ff
+        --hover-color: #cdc4ff;
+        --scroll-color: rgb(50, 50, 50);
+        --scroll-width: 0.25rem
     }
 
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+        background-color: transparent;
+        width: var(--scroll-width);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--scroll-color);
+        border-radius: var(--scroll-width);
     }
 
     footer {
