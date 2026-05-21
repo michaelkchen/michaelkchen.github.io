@@ -66,7 +66,9 @@ import { Content as Bio } from '../content/bio.md'
             </div>
         </div>
     </header>
-    <section id="software">
+
+    <div id="software"/>
+    <section>
         <div class="flex-container" style="flex-direction: column;">
             <h1 style="margin: 2em">Software Experience</h1>
             <div class="gallery-container">
@@ -76,7 +78,8 @@ import { Content as Bio } from '../content/bio.md'
         </div>
     </section>
 
-    <section id="art">
+    <div id="art"/>
+    <section>
         <div class="flex-container" style="flex-direction: column;">
             <h1 style="margin: 2em">Art/Media Projects</h1>
             <div class="gallery-container">
@@ -114,7 +117,7 @@ import { Content as Bio } from '../content/bio.md'
         --link-color: rgb(33, 103, 255);
         --hover-color: #cdc4ff;
         --scroll-color: rgb(50, 50, 50);
-        --scroll-width: 0.25rem
+        --scroll-width: 0.25rem;
     }
 
     * {
@@ -166,15 +169,17 @@ import { Content as Bio } from '../content/bio.md'
     html {
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
-        scrollbar-gutter: stable;
+        scroll-behavior: smooth;
     }
 
     body {
         background-color: var(--base-color);
+        padding-left: var(--scroll-width);
     }
 
     body:has(dialog[open]) {
         overflow: hidden;
+        padding-left: 0;
     }
 
     h1, h2, h3 {
@@ -219,23 +224,30 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        header, section {
+        section {
             position: relative;
+            top: 0;
+            opacity: 100%;
             margin: 0 auto;
             width: min(110em, 100%);
-            animation: fade-in linear both, fade-out linear both;
+            animation: fade-in ease-out backwards, fade-out ease-in forwards;
             animation-timeline: view();
-            animation-range: entry 13em, exit 10em;
+            animation-range: entry 10rem, exit 10rem;
         }
         header {
-            margin-top: 13em;
+            position: relative;
+            top: 0;
+            margin: 13em auto 0 auto;
+            width: min(110em, 100%);
+            animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
+            animation-timeline: auto, view();
+            animation-range: normal, exit -10rem;
         }
         @keyframes fade-in {
-            from {opacity: 0%; top: 20em}
-            to {opacity: 100%; top: 0}
+            from {opacity: 0%; top: 20rem}
         }
         @keyframes fade-out {
-            to {opacity: 0%; top: -20em}
+            to {opacity: 0%; top: -20rem}
         }
     }
 
