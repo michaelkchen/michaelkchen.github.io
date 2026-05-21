@@ -66,9 +66,9 @@ import { Content as Bio } from '../content/bio.md'
             </div>
         </div>
     </header>
-    <section>
+    <section id="software">
         <div class="flex-container" style="flex-direction: column;">
-            <h1 id="software" style="margin: 2em">Software Experience</h1>
+            <h1 style="margin: 2em">Software Experience</h1>
             <div class="gallery-container">
                 {works.filter(work => work.data.type == WORK_SWE)
                 .map(work => <WorkCard work={work}/>)}
@@ -76,9 +76,9 @@ import { Content as Bio } from '../content/bio.md'
         </div>
     </section>
 
-    <section>
+    <section id="art">
         <div class="flex-container" style="flex-direction: column;">
-            <h1 id="art" style="margin: 2em">Art/Media Projects</h1>
+            <h1 style="margin: 2em">Art/Media Projects</h1>
             <div class="gallery-container">
                 {works.filter(work => work.data.type == WORK_ART)
                 .map(work => <WorkCard work={work}/>)}
@@ -134,12 +134,33 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     footer {
+        justify-items: center;
         background-color: var(--footer-color);
-        padding: 3em
+        padding: 1em
     }
 
     footer p {
         color: gray;
+        font-size: 80%
+    }
+
+    .return {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 5%);
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        margin-top: 20em;
+        gap: 1em;
+        padding: 3em 0;
+    }
+
+    .return h1 {
+        font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: lighter;
     }
 
     html {
@@ -197,9 +218,25 @@ import { Content as Bio } from '../content/bio.md'
         color: var(--hover-color);
     }
 
-    header, section {
-        margin: 13em auto 20em auto;
-        width: min(110em, 100%);
+    @media (prefers-reduced-motion: no-preference) {
+        header, section {
+            position: relative;
+            margin: 0 auto;
+            width: min(110em, 100%);
+            animation: fade-in linear both, fade-out linear both;
+            animation-timeline: view();
+            animation-range: entry 13em, exit 10em;
+        }
+        header {
+            margin-top: 13em;
+        }
+        @keyframes fade-in {
+            from {opacity: 0%; top: 20em}
+            to {opacity: 100%; top: 0}
+        }
+        @keyframes fade-out {
+            to {opacity: 0%; top: -20em}
+        }
     }
 
     header img {
@@ -211,26 +248,6 @@ import { Content as Bio } from '../content/bio.md'
     .end {
         margin-bottom: 0em !important;
         padding-bottom: 0em;
-    }
-
-    .return {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 5%);
-        text-decoration: none;
-        color: white;
-        width: 100%;
-        margin-top: 5em;
-        gap: 1em;
-        padding: 3em 0;
-        
-    }
-
-    .return h1 {
-        font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: lighter;
     }
 
     .flex-container {
