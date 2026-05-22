@@ -39,14 +39,6 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
     const dialog = document.getElementById(`${work.id}-dialogue`)
     const openDialog = document.getElementById(`${work.id}-learn`)
     const closeDialog = document.getElementById(`${work.id}-close`)
-    dialog.addEventListener('transitionend', () => {
-        if (!dialog.classList.contains('show'))
-            dialog.close();
-    })
-    dialog.addEventListener('cancel', (e) => {
-        e.preventDefault();
-        dialog.classList.remove('show');
-    });
     openDialog.addEventListener('click', () => {
         dialog.classList.remove('show');
         dialog.showModal();
@@ -55,10 +47,22 @@ const color = work.data.type == "swe" ? 'var(--color1)' : 'var(--color2)'
     closeDialog.addEventListener('click', () => {
         dialog.classList.remove('show');
     })
+    dialog.addEventListener('transitionend', () => {
+        if (!dialog.classList.contains('show')) {
+            const iframes = dialog.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = src;
+            })
+            dialog.close();
+        }
+    })
+    dialog.addEventListener('cancel', (e) => {
+        e.preventDefault();
+        dialog.classList.remove('show');
+    });
     dialog.addEventListener('click', (e) => {
-        const bounds = dialog.getBoundingClientRect();
-        if (e.clientX < bounds.left || e.clientX > bounds.right ||
-            e.clientY < bounds.top || e.clientY > bounds.bottom) {
+        if (e.target == e.currentTarget) {
             dialog.classList.remove('show');
         }
     })

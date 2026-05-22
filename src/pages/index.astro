@@ -186,6 +186,7 @@ import { Content as Bio } from '../content/bio.md'
         font-family: Roboto, 'TikTok Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bolder;
     }
+
     h4, h5, h6 {
         font-weight: normal;
         color: var(--text-color2)
@@ -237,6 +238,7 @@ import { Content as Bio } from '../content/bio.md'
         header {
             position: relative;
             top: 0;
+            scale: 1;
             margin: 13em auto 0 auto;
             width: min(110em, 100%);
             animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
@@ -244,10 +246,10 @@ import { Content as Bio } from '../content/bio.md'
             animation-range: normal, exit -10rem;
         }
         @keyframes fade-in {
-            from {opacity: 0%; top: 20rem}
+            from {opacity: 0%; top: 20rem; scale: 0.95}
         }
         @keyframes fade-out {
-            to {opacity: 0%; top: -20rem}
+            to {opacity: 0%; top: -20rem; scale: 0.95}
         }
     }
 
