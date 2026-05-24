@@ -27,25 +27,51 @@ for (var i = 0; i < images.length; i++) {
         </div>
     ))}
 </div>
-<dialog class="lightbox" id=`${id}-lightbox`/>
+<dialog class="lightbox" id=`${id}-lightbox`>
+    
+    <div class="close-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z" />
+        </svg>
+    </div>
+    <div class="nav-button left">
+        <svg xmlns="http://www.w3.org/2000/svg" width="min(4vw, 4vh)" height="min(4vw, 4vh)" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M16.62 2.99a1.25 1.25 0 0 0-1.77 0L6.54 11.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.38 12l7.25-7.25c.48-.48.48-1.28-.01-1.76" />
+        </svg>
+    </div>
+    <img/>
+    <div class="nav-button right">
+        <svg xmlns="http://www.w3.org/2000/svg" width="min(4vw, 4vh)" height="min(4vw, 4vh)" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31a.996.996 0 0 0 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76" />
+        </svg>
+    </div>
+
+</dialog>
 
 <script define:vars={{id}}>
     const lightbox = document.getElementById(`${id}-lightbox`);
     const gallery = document.getElementById(`${id}-gallery`);
+    const close = lightbox.querySelector('.close-button');
+    const left = lightbox.querySelector('.left');
+    const right = lightbox.querySelector('.right');
     const images = gallery.querySelectorAll('img');
+    var index = 0;
     images.forEach(image => {
         image.addEventListener('click', () => {
-            const img = document.createElement('img');
-            lightbox.appendChild(img);
+            const img = lightbox.querySelector('img');
             img.src = image.src;
             lightbox.showModal();
             lightbox.classList.add('show');
+            index = Array.from(images).indexOf(image);
         })
     })
     lightbox.addEventListener('transitionend', () => {
         if (!lightbox.classList.contains('show')) {
             lightbox.querySelectorAll('img').forEach(img => {
-                img.remove();
+                img.removeAttribute('src');
             });
             lightbox.close();
         }
@@ -59,9 +85,46 @@ for (var i = 0; i < images.length; i++) {
         e.preventDefault();
         lightbox.classList.remove('show');
     });
+    close.addEventListener('click', e => {
+        lightbox.classList.remove('show');
+    })
+    left.addEventListener('click', () => {
+        const img = lightbox.querySelector('img');
+        index = index == 0 ? images.length - 1 : index - 1;
+        document.startViewTransition(() => { img.src = images[index].src; });
+    })
+    right.addEventListener('click', () => {
+        const img = lightbox.querySelector('img');
+        index = (index + 1) % images.length;
+        document.startViewTransition(() => { img.src = images[index].src; });
+    })
 </script>
 
 <style define:vars={{width: `${width}`}}>
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        cursor: pointer;
+    }
+
+    .nav-button {
+        position: absolute;
+        color: white;
+        align-self: center;
+        cursor: pointer;
+    }
+
+    .left {
+        left: 0;
+    }
+
+    .right {
+        right: 0;
+    }
+
     .gallery {
         display: flex;
         flex-wrap: wrap;
@@ -89,8 +152,9 @@ for (var i = 0; i < images.length; i++) {
 
     @media (prefers-reduced-motion: no-preference) {
         .lightbox {
-            transition: top 0.1s, scale 0.1s, filter 0.1s;
+            transition: opacity 0.1s, scale 0.1s, filter 0.1s;
             transition-timing-function: ease-out;
+            user-select: none;
         }
 
         .lightbox::backdrop {
@@ -123,14 +187,15 @@ for (var i = 0; i < images.length; i++) {
             background: transparent;
             scale: 95%;
             opacity: 0%;
-            filter: blur(5px);
+            filter: blur(2px);
         }
-    }
-    :global(.lightbox img) {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+
+        :global(.lightbox img) {
+            display: block;
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+        }
     }
 
 </style>
