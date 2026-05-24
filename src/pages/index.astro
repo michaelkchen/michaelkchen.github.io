@@ -60,9 +60,9 @@ import { Content as Bio } from '../content/bio.md'
             </div>
             <div class="text-container">
                 <Bio />
-                <a href="#software" class="cta-button" style="background-color: rgba(var(--color1), 0.5);">Software</a>
-                <a href="#art" class="cta-button" style="background-color: rgba(var(--color2), 0.5);">Art/Media</a>
-                <a href="resume.pdf" class="cta-button" style="background-color: rgba(var(--color3), 0.5);" target="_blank">Resume</a>
+                <a href="#software" class="cta-button swe">Software</a>
+                <a href="#art" class="cta-button art">Art/Media</a>
+                <a href="resume.pdf" class="cta-button resume" target="_blank">Resume</a>
             </div>
         </div>
     </header>
@@ -90,11 +90,13 @@ import { Content as Bio } from '../content/bio.md'
     </section>
 
     <a href="#" class="return">
-        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
-            <path d="M0 0h1024v1024H0z" fill="none" />
-            <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
-        </svg>
-        <h1>Back to Top!</h1>
+        <div class="return-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
+                <path d="M0 0h1024v1024H0z" fill="none" />
+                <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
+            </svg>
+            <h1>Back to Top!</h1>
+        </div>
     </a>
     <footer>
         <p>© Michael Chen 2026</p>
@@ -160,7 +162,7 @@ import { Content as Bio } from '../content/bio.md'
         text-decoration: none;
         color: white;
         width: 100%;
-        margin-top: 20em;
+        margin-top: 50vh;
         gap: 1em;
         padding: 3em 0;
     }
@@ -170,7 +172,20 @@ import { Content as Bio } from '../content/bio.md'
         font-weight: lighter;
     }
 
+    .return .return-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform-origin: center;
+        transition: transform 0.2s linear;
+    }
+
+    .return:hover .return-inner {
+        transform: scale(1.1);
+    }
+
     html {
+        background-color: var(--base-color);
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
         scroll-behavior: smooth;
@@ -243,7 +258,7 @@ import { Content as Bio } from '../content/bio.md'
             position: relative;
             top: 0;
             scale: 1;
-            margin: 13em auto 0 auto;
+            margin: 23vh auto 0 auto;
             width: min(110em, 100%);
             animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
             animation-timeline: auto, view();
@@ -307,19 +322,60 @@ import { Content as Bio } from '../content/bio.md'
         font-size: 1.25rem;
     }
 
+    .swe {
+        background-color: rgba(var(--color1), 0.5);
+    }
+
+    .art {
+        background-color: rgba(var(--color2), 0.5);
+    }
+
+    .resume {
+        background-color: rgba(var(--color3), 0.5);
+    }
+
     .cta-button {
         display: inline-block;
         text-decoration: none;
         color:white;
         padding: .75em 1.25em;
-        border-radius: 0.5em;
+        border-radius: 0.25em;
         font-weight: 800;
         font-family: Roboto, 'TikTok Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: box-shadow 0.2s, scale 0.2s, filter 0.2s;
+    }
+
+    .swe:hover {
+        box-shadow: 0em 0em 0.5em rgb(var(--color1));
+    }
+
+    .art:hover {
+        box-shadow: 0em 0em 0.5em rgb(var(--color2));
+    }
+
+    .resume:hover {
+        box-shadow: 0em 0em 0.5em rgb(var(--color3));
+    }
+
+    .cta-button:hover {
+        scale: 95%;
+        filter: saturate(200%)
     }
 
     .social-button {
         display: inline-block;
         text-decoration: none;
+        background-color: transparent;
         color: white;
     }
+
+    .social-button svg {
+        transition: scale 0.2s, filter 0.2s;
+    }
+
+    .social-button:hover svg {
+        scale: 110%;
+        filter: drop-shadow(0 0 0.1em white);
+    }
+
 </style>

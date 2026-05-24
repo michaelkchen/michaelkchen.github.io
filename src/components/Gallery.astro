@@ -29,7 +29,7 @@ for (var i = 0; i < images.length; i++) {
 </div>
 <dialog class="lightbox" id=`${id}-lightbox`>
     
-    <div class="close-button">
+    <div class="nav-button close">
         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none" />
             <path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z" />
@@ -54,7 +54,7 @@ for (var i = 0; i < images.length; i++) {
 <script define:vars={{id}}>
     const lightbox = document.getElementById(`${id}-lightbox`);
     const gallery = document.getElementById(`${id}-gallery`);
-    const close = lightbox.querySelector('.close-button');
+    const close = lightbox.querySelector('.close');
     const left = lightbox.querySelector('.left');
     const right = lightbox.querySelector('.right');
     const images = gallery.querySelectorAll('img');
@@ -102,27 +102,34 @@ for (var i = 0; i < images.length; i++) {
 
 <style define:vars={{width: `${width}`}}>
 
-    .close-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: white;
-        cursor: pointer;
-    }
-
     .nav-button {
         position: absolute;
         color: white;
         align-self: center;
         cursor: pointer;
+        opacity: 50%;
+        transition: scale 0.2s, opacity 0.2s;
+    }
+
+    .nav-button:hover {
+        scale: 110%;
+        opacity: 100%;
     }
 
     .left {
         left: 0;
+        transform-origin: left;
     }
 
     .right {
         right: 0;
+        transform-origin: right;
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .gallery {
@@ -148,6 +155,11 @@ for (var i = 0; i < images.length; i++) {
         height: auto;
         border-radius: 1%;
         cursor: pointer;
+        transition: scale 0.2s;
+    }
+
+    .gallery img:hover {
+        scale: 97.5%;
     }
 
     @media (prefers-reduced-motion: no-preference) {
