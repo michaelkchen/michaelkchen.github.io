@@ -36,7 +36,7 @@ import { Content as Bio } from '../content/bio.md'
     <title>Michael Chen</title>
 </head>
 <body>
-    <canvas id="background" style="width: 100%; height: 100%"/>
+    <canvas id="background"/>
     <header>
         <div class="flex-container">
             <div class="flex-container profile-container">
@@ -132,16 +132,6 @@ import { Content as Bio } from '../content/bio.md'
         box-sizing: border-box;
     }
 
-    ::-webkit-scrollbar {
-        background-color: transparent;
-        width: var(--scroll-width);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: var(--scroll-color);
-        border-radius: var(--scroll-width);
-    }
-
     :focus-visible {
         outline: none;
     }
@@ -151,6 +141,8 @@ import { Content as Bio } from '../content/bio.md'
         left: 0;
         position: fixed;
         z-index: -1;
+        width: 100%;
+        height: 100%
     }
 
     footer {
@@ -200,16 +192,16 @@ import { Content as Bio } from '../content/bio.md'
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
         scroll-behavior: smooth;
+        scrollbar-color: var(--scroll-color) transparent;
+        scrollbar-width: thin;
     }
 
     body {
         background-color: transparent;
-        padding-left: var(--scroll-width);
     }
 
     body:has(dialog[open]) {
         overflow: hidden;
-        padding-left: 0;
     }
 
     h1, h2, h3 {
