@@ -27,6 +27,7 @@ works.sort((workA, workB) => {
 })
 import { Content as Bio } from '../content/bio.md'
 ---
+<script src="../components/shaders.js"></script>
 
 <Layout>
     <head>
@@ -35,6 +36,7 @@ import { Content as Bio } from '../content/bio.md'
     <title>Michael Chen</title>
 </head>
 <body>
+    <canvas id="background" style="width: 100%; height: 100%"/>
     <header>
         <div class="flex-container">
             <div class="flex-container profile-container">
@@ -67,27 +69,29 @@ import { Content as Bio } from '../content/bio.md'
         </div>
     </header>
 
-    <div id="software"/>
-    <section>
-        <div class="flex-container" style="flex-direction: column;">
-            <h1 style="margin: 2em">Software Experience</h1>
-            <div class="gallery-container">
-                {works.filter(work => work.data.type == WORK_SWE)
-                .map(work => <WorkCard work={work}/>)}
+    <div id="software">
+        <section id="software-section">
+            <div class="flex-container" style="flex-direction: column;">
+                <h1 style="margin: 2em">Software Experience</h1>
+                <div class="gallery-container">
+                    {works.filter(work => work.data.type == WORK_SWE)
+                    .map(work => <WorkCard work={work}/>)}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <div id="art"/>
-    <section>
-        <div class="flex-container" style="flex-direction: column;">
-            <h1 style="margin: 2em">Art/Media Projects</h1>
-            <div class="gallery-container">
-                {works.filter(work => work.data.type == WORK_ART)
-                .map(work => <WorkCard work={work}/>)}
+    <div id="art">
+        <section id="art-section">
+            <div class="flex-container" style="flex-direction: column;">
+                <h1 style="margin: 2em">Art/Media Projects</h1>
+                <div class="gallery-container">
+                    {works.filter(work => work.data.type == WORK_ART)
+                    .map(work => <WorkCard work={work}/>)}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <a href="#" class="return">
         <div class="return-inner">
@@ -110,10 +114,10 @@ import { Content as Bio } from '../content/bio.md'
 
     :root {
         --base-color: rgb(0, 0, 0);
-        --color1: 34, 85, 140;
-        --color2: 48, 34, 140;
-        --color3: 129, 34, 140;
-        --footer-color: color-mix(in srgb, var(--base-color), white 2%);
+        --swe-color: 34, 85, 140;
+        --art-color: 48, 34, 140;
+        --resume-color: 129, 34, 140;
+        --footer-color: color-mix(in srgb, var(--base-color), white 0%);
         --text-color: rgb(255, 255, 255);
         --text-color2: rgb(173, 173, 173);
         --link-color: rgb(33, 103, 255);
@@ -142,6 +146,13 @@ import { Content as Bio } from '../content/bio.md'
         outline: none;
     }
 
+    canvas {
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: -1;
+    }
+
     footer {
         justify-items: center;
         background-color: var(--footer-color);
@@ -158,7 +169,7 @@ import { Content as Bio } from '../content/bio.md'
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: rgba(255, 255, 255, 5%);
+        background-color: rgba(0, 0, 0, 0.5);
         text-decoration: none;
         color: white;
         width: 100%;
@@ -185,14 +196,14 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     html {
-        background-color: var(--base-color);
+        background-color: transparent;
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
         scroll-behavior: smooth;
     }
 
     body {
-        background-color: var(--base-color);
+        background-color: transparent;
         padding-left: var(--scroll-width);
     }
 
@@ -323,15 +334,15 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe {
-        background-color: rgba(var(--color1), 0.5);
+        background-color: rgba(var(--swe-color), 0.5);
     }
 
     .art {
-        background-color: rgba(var(--color2), 0.5);
+        background-color: rgba(var(--art-color), 0.5);
     }
 
     .resume {
-        background-color: rgba(var(--color3), 0.5);
+        background-color: rgba(var(--resume-color), 0.5);
     }
 
     .cta-button {
@@ -346,15 +357,15 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color1));
+        box-shadow: 0em 0em 0.5em rgb(var(--swe-color));
     }
 
     .art:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color2));
+        box-shadow: 0em 0em 0.5em rgb(var(--art-color));
     }
 
     .resume:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color3));
+        box-shadow: 0em 0em 0.5em rgb(var(--resume-color));
     }
 
     .cta-button:hover {
