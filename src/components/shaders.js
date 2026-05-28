@@ -4,23 +4,38 @@ const canvas = document.getElementById('background');
 const header = document.querySelector('header');
 const software = document.getElementById('software-section');
 const art = document.getElementById('art-section');
+const style = window.getComputedStyle(document.documentElement);
 
-const defaultColor = 'rgb(31, 8, 48)'
-const softwareColor = 'rgb(8, 27, 48)'
-const artColor = 'rgb(17, 8, 48)'
+const defaultColor = `${style.getPropertyValue('--resume-color').trim()}`
+const softwareColor = `${style.getPropertyValue('--swe-color').trim()}`
+const artColor = `${style.getPropertyValue('--art-color').trim()}`
+
+console.log(defaultColor)
+
+// const defaultColor = 'rgb(82, 61, 97)' //'rgb(31, 8, 48)'
+// const softwareColor = 'rgb(8, 27, 48)'
+// const artColor = 'rgb(17, 8, 48)'
 var color = defaultColor;
 
 var components = [{
-    type: 'Swirl',
+    type: 'Plasma',
     id: 'liquid',
     props: {
-        colorA: 'rgb(1, 1, 1)',
-        colorB: color,
-        blend: 50,
-        detail: 1,
-        speed: 0.5,
+        colorA: color,
+        colorB: 'rgb(1, 1, 1)',
+        density: 1,
+        warp: 0.4,
     }, 
 }]
+components.push({
+    type: 'CursorRipples',
+    id: 'ripples',
+    props: {
+        visible: true,
+        decay: 7.5,
+        intensity: 20,
+    }
+})
 for (var i = 0; i < 6; i++) {
     components.push({
         type: 'Circle',
@@ -38,19 +53,10 @@ for (var i = 0; i < 6; i++) {
     })
 }
 
+
 const shader = await createShader(canvas, {
     colorSpace: 'srgb',
     components: components
-        
-        // {
-        //     type: 'Glow',
-        //     id: 'glow',
-        //     props: {
-        //         intensity: 1000,
-        //         threshold: 0,
-        //         maskSource: 'circle'
-        //     },
-        // }
 })
 
 const observer = new IntersectionObserver((entries) => {
@@ -73,6 +79,20 @@ observer.observe(header)
 observer.observe(software)
 observer.observe(art)
 
+addEventListener('mousedown', (e) => {
+    shader.update('ripples', {visible: true})
+})
+addEventListener('mouseup', (e) => {
+    shader.update('ripples', {visible: false})
+    // animate(7.5, 100, {
+    //     duration: 1,
+    //     ease: 'linear',
+    //     onUpdate: (latest) => {
+    //         shader.update('ripples', {decay: latest})
+    //     }
+    // })
+})
+
 async function crossColor(newColor) {
     await animate(color, newColor, {
         duration: 0.5,
@@ -80,7 +100,7 @@ async function crossColor(newColor) {
         onUpdate: (latest) => {
             const rgb = latest.match(/\d+/g);
             color = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
-            shader.update('liquid', {colorB: color})
+            shader.update('liquid', {colorA: color})
         }
     })
 }

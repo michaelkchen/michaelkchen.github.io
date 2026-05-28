@@ -114,9 +114,9 @@ import { Content as Bio } from '../content/bio.md'
 
     :root {
         --base-color: rgb(0, 0, 0);
-        --swe-color: 34, 85, 140;
-        --art-color: 48, 34, 140;
-        --resume-color: 129, 34, 140;
+        --swe-color: rgb(34, 85, 140);
+        --art-color: rgb(48, 34, 140);
+        --resume-color: rgb(129, 34, 140);
         --footer-color: color-mix(in srgb, var(--base-color), white 0%);
         --text-color: rgb(255, 255, 255);
         --text-color2: rgb(173, 173, 173);
@@ -141,7 +141,7 @@ import { Content as Bio } from '../content/bio.md'
         left: 0;
         position: fixed;
         z-index: -1;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
     }
 
@@ -185,6 +185,7 @@ import { Content as Bio } from '../content/bio.md'
 
     .return:hover .return-inner {
         transform: scale(1.1);
+
     }
 
     html {
@@ -194,6 +195,7 @@ import { Content as Bio } from '../content/bio.md'
         scroll-behavior: smooth;
         scrollbar-color: var(--scroll-color) rgba(0, 0, 0, 0);
         scrollbar-width: thin;
+        user-select: none;
     }
 
     body {
@@ -328,15 +330,15 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe {
-        background-color: rgba(var(--swe-color), 0.5);
+        background-color: color-mix(in srgb, var(--swe-color) 50%, transparent)
     }
 
     .art {
-        background-color: rgba(var(--art-color), 0.5);
+        background-color: color-mix(in srgb, var(--art-color) 50%, transparent)
     }
 
     .resume {
-        background-color: rgba(var(--resume-color), 0.5);
+        background-color: color-mix(in srgb, var(--resume-color) 50%, transparent)
     }
 
     .cta-button {
@@ -351,20 +353,20 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--swe-color));
+        box-shadow: 0em 0em 1em var(--swe-color)
     }
 
     .art:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--art-color));
+        box-shadow: 0em 0em 1em var(--art-color)
     }
 
     .resume:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--resume-color));
+        box-shadow: 0em 0em 1em var(--resume-color)
     }
 
     .cta-button:hover {
         scale: 95%;
-        filter: saturate(200%)
+        filter: brightness(200%) saturate(200%)
     }
 
     .social-button {
