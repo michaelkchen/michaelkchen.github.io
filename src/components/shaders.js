@@ -10,6 +10,8 @@ const defaultColor = `${style.getPropertyValue('--resume-color').trim()}`
 const softwareColor = `${style.getPropertyValue('--swe-color').trim()}`
 const artColor = `${style.getPropertyValue('--art-color').trim()}`
 
+var rippleAnimation = null;
+
 console.log(defaultColor)
 
 // const defaultColor = 'rgb(82, 61, 97)' //'rgb(31, 8, 48)'
@@ -31,7 +33,7 @@ components.push({
     type: 'CursorRipples',
     id: 'ripples',
     props: {
-        visible: true,
+        visible: false,
         decay: 7.5,
         intensity: 20,
     }
@@ -80,17 +82,22 @@ observer.observe(software)
 observer.observe(art)
 
 addEventListener('mousedown', (e) => {
-    shader.update('ripples', {visible: true})
+    if (rippleAnimation != null && rippleAnimation.state === 'running') {
+        rippleAnimation.stop();
+    }
+    shader.update('ripples', {decay: 7.5, visible: true})
 })
 addEventListener('mouseup', (e) => {
-    shader.update('ripples', {visible: false})
-    // animate(7.5, 100, {
-    //     duration: 1,
-    //     ease: 'linear',
-    //     onUpdate: (latest) => {
-    //         shader.update('ripples', {decay: latest})
-    //     }
-    // })
+    rippleAnimation = animate(7.5, 100, {
+        duration: 1,
+        ease: 'easeOut',
+        onUpdate: (latest) => {
+            shader.update('ripples', {decay: latest, visible: true})
+        },
+        onComplete: () => {
+            shader.update('ripples', {visible: false})
+        }
+    })
 })
 
 async function crossColor(newColor) {
