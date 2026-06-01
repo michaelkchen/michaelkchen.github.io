@@ -27,6 +27,7 @@ works.sort((workA, workB) => {
 })
 import { Content as Bio } from '../content/bio.md'
 ---
+<script src="../components/shaders.js"></script>
 
 <Layout>
     <head>
@@ -35,6 +36,7 @@ import { Content as Bio } from '../content/bio.md'
     <title>Michael Chen</title>
 </head>
 <body>
+    <canvas id="background"/>
     <header>
         <div class="flex-container">
             <div class="flex-container profile-container">
@@ -67,27 +69,29 @@ import { Content as Bio } from '../content/bio.md'
         </div>
     </header>
 
-    <div id="software"/>
-    <section>
-        <div class="flex-container" style="flex-direction: column;">
-            <h1 style="margin: 2em">Software Experience</h1>
-            <div class="gallery-container">
-                {works.filter(work => work.data.type == WORK_SWE)
-                .map(work => <WorkCard work={work}/>)}
+    <div id="software">
+        <section id="software-section">
+            <div class="flex-container" style="flex-direction: column;">
+                <h1 style="margin: 2em">Software Experience</h1>
+                <div class="gallery-container">
+                    {works.filter(work => work.data.type == WORK_SWE)
+                    .map(work => <WorkCard work={work}/>)}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <div id="art"/>
-    <section>
-        <div class="flex-container" style="flex-direction: column;">
-            <h1 style="margin: 2em">Art/Media Projects</h1>
-            <div class="gallery-container">
-                {works.filter(work => work.data.type == WORK_ART)
-                .map(work => <WorkCard work={work}/>)}
+    <div id="art">
+        <section id="art-section">
+            <div class="flex-container" style="flex-direction: column;">
+                <h1 style="margin: 2em">Art/Media Projects</h1>
+                <div class="gallery-container">
+                    {works.filter(work => work.data.type == WORK_ART)
+                    .map(work => <WorkCard work={work}/>)}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <a href="#" class="return">
         <div class="return-inner">
@@ -110,10 +114,10 @@ import { Content as Bio } from '../content/bio.md'
 
     :root {
         --base-color: rgb(0, 0, 0);
-        --color1: 34, 85, 140;
-        --color2: 48, 34, 140;
-        --color3: 129, 34, 140;
-        --footer-color: color-mix(in srgb, var(--base-color), white 2%);
+        --swe-color: rgb(34, 85, 140);
+        --art-color: rgb(48, 34, 140);
+        --resume-color: rgb(129, 34, 140);
+        --footer-color: color-mix(in srgb, var(--base-color), white 0%);
         --text-color: rgb(255, 255, 255);
         --text-color2: rgb(173, 173, 173);
         --link-color: rgb(33, 103, 255);
@@ -128,24 +132,23 @@ import { Content as Bio } from '../content/bio.md'
         box-sizing: border-box;
     }
 
-    ::-webkit-scrollbar {
-        background-color: transparent;
-        width: var(--scroll-width);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: var(--scroll-color);
-        border-radius: var(--scroll-width);
-    }
-
     :focus-visible {
         outline: none;
+    }
+
+    canvas {
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
     }
 
     footer {
         justify-items: center;
         background-color: var(--footer-color);
-        padding: 1em
+        padding: 1em;
     }
 
     footer p {
@@ -158,7 +161,7 @@ import { Content as Bio } from '../content/bio.md'
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: rgba(255, 255, 255, 5%);
+        background-color: rgba(0, 0, 0, 0.5);
         text-decoration: none;
         color: white;
         width: 100%;
@@ -177,23 +180,27 @@ import { Content as Bio } from '../content/bio.md'
         flex-direction: column;
         align-items: center;
         transform-origin: center;
-        transition: transform 0.2s linear;
+        transition: transform 0.2s ease;
     }
 
     .return:hover .return-inner {
         transform: scale(1.1);
+
     }
 
     html {
-        background-color: var(--base-color);
+        background-color: black;
         font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-color);
         scroll-behavior: smooth;
+        scrollbar-color: var(--scroll-color) rgba(0, 0, 0, 0);
+        scrollbar-width: thin;
+        user-select: none;
     }
 
     body {
-        background-color: var(--base-color);
-        padding-left: var(--scroll-width);
+        background-color: transparent;
+        padding-left: calc(100vw - 100%);
     }
 
     body:has(dialog[open]) {
@@ -323,15 +330,15 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe {
-        background-color: rgba(var(--color1), 0.5);
+        background-color: color-mix(in srgb, var(--swe-color) 50%, transparent)
     }
 
     .art {
-        background-color: rgba(var(--color2), 0.5);
+        background-color: color-mix(in srgb, var(--art-color) 50%, transparent)
     }
 
     .resume {
-        background-color: rgba(var(--color3), 0.5);
+        background-color: color-mix(in srgb, var(--resume-color) 50%, transparent)
     }
 
     .cta-button {
@@ -346,20 +353,20 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     .swe:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color1));
+        box-shadow: 0em 0em 1em var(--swe-color)
     }
 
     .art:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color2));
+        box-shadow: 0em 0em 1em var(--art-color)
     }
 
     .resume:hover {
-        box-shadow: 0em 0em 0.5em rgb(var(--color3));
+        box-shadow: 0em 0em 1em var(--resume-color)
     }
 
     .cta-button:hover {
         scale: 95%;
-        filter: saturate(200%)
+        filter: brightness(200%) saturate(200%)
     }
 
     .social-button {
