@@ -20,7 +20,7 @@ const color = work.data.type == "swe" ? 'var(--swe-color)' : 'var(--art-color)'
     <p>{work.data.summary}</p>
     <button class=`cta-button learn ${work.data.type}` id={`${work.id}-learn`}>Learn More</a>
 </div>
-<dialog class="dialogue" id=`${work.id}-dialogue`>
+<dialog class="dialog" id=`${work.id}-dialog`>
     <div class="title">
         <button class="close-button" id=`${work.id}-close`>
             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -36,7 +36,7 @@ const color = work.data.type == "swe" ? 'var(--swe-color)' : 'var(--art-color)'
 </dialog>
 
 <script define:vars={{work}}>
-    const dialog = document.getElementById(`${work.id}-dialogue`)
+    const dialog = document.getElementById(`${work.id}-dialog`)
     const openDialog = document.getElementById(`${work.id}-learn`)
     const closeDialog = document.getElementById(`${work.id}-close`)
     openDialog.addEventListener('click', () => {
@@ -70,37 +70,37 @@ const color = work.data.type == "swe" ? 'var(--swe-color)' : 'var(--art-color)'
 
 <style>
     
-    :global(.dialogue a:link) {
+    :global(.dialog a:link) {
         color: var(--link-color)
     }
 
-    :global(.dialogue a:visited) {
+    :global(.dialog a:visited) {
         color: var(--link-color)
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        .dialogue::backdrop {
+        .dialog::backdrop {
             background: rgba(0, 0, 0, 0);
             backdrop-filter: none;
             transition: background 0.25s, backdrop-filter 0.25s;
         }
 
-        .dialogue.show::backdrop {
+        .dialog.show::backdrop {
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(2px);
         }
 
-        .dialogue {
+        .dialog {
             transition: top 0.25s, opacity 0.25s;
             transition-timing-function: ease-out;
         }
 
-        .dialogue[open].show {
+        .dialog[open].show {
             top: 0rem;
             opacity: 100%;
         }
 
-        .dialogue[open] {
+        .dialog[open] {
             display: flex;
             flex-direction: column;
             align-self: center;

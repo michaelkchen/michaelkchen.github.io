@@ -1,0 +1,111 @@
+---
+interface Props {
+    size: number;
+}
+const { size } = Astro.props;
+
+---
+<button class="show-hide hide">
+    <div class="up" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M6 17.59L7.41 19L12 14.42L16.59 19L18 17.59l-6-6z" />
+            <path fill="currentColor" d="m6 11l1.41 1.41L12 7.83l4.59 4.58L18 11l-6-6z" />
+        </svg>
+        <h2>Show {size-3} Less</h2>
+    </div>
+    <div class="down" style="display: flex">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M18 6.41L16.59 5L12 9.58L7.41 5L6 6.41l6 6z" />
+            <path fill="currentColor" d="m18 13l-1.41-1.41L12 16.17l-4.59-4.58L6 13l6 6z" />
+        </svg>
+        <h2>Show {size-3} More</h2>
+    </div>
+</button>
+
+<script>
+    const sweSection = document.getElementById('software-section');
+    const artSection = document.getElementById('art-section');
+    const showHides = document.querySelectorAll('.show-hide');
+    const sweProjects = sweSection?.querySelectorAll('.project-container');
+    const artProjects = artSection?.querySelectorAll('.project-container');
+
+    if (sweProjects) {
+        if (sweProjects.length <= 3) {
+            sweSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
+        }
+        for (var i = 3; i < sweProjects.length; i++) {
+            (sweProjects?.item(i) as HTMLElement).style.setProperty('display', 'none');
+        }
+    }
+    if (artProjects) {
+        if (artProjects.length <= 3) {
+            artSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
+        }
+        for (var i = 3; i < artProjects.length; i++) {
+            (artProjects?.item(i) as HTMLElement).style.setProperty('display', 'none');
+        }
+    }
+
+    showHides.forEach(showHide => {
+        showHide.addEventListener('click', (e) => {
+            const h2 = showHide.querySelector('h2');
+            if (showHide.classList.contains('hide')) {
+                showHide.classList.remove('hide');
+                showHide.classList.add('show');
+                showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'none');
+                showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'flex');
+            } else {
+                showHide.classList.add('hide');
+                showHide.classList.remove('show');
+                showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'flex');
+                showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'none');
+            }
+            const projects = (artSection?.contains(showHide) && artProjects) || (sweSection?.contains(showHide) && sweProjects);
+            if (projects) {
+                for (var i = 3; i < projects.length; i++) {
+                    (projects.item(i) as HTMLElement).style.setProperty('display', showHide.classList.contains('show') ? 'flex' : 'none');
+                }
+            }
+            if (showHide.classList.contains('hide')) {
+                showHide.scrollIntoView({
+                    block: 'end'
+                });
+            }
+        })
+    })
+</script>
+
+<style>
+
+    /* .up, .down {
+        flex-direction: column;
+        align-items: center;
+    } */
+
+    .show-hide {
+        display: flex;
+        justify-self: center;
+        background: none;
+        border: none;
+        color: color-mix(in srgb, black 25%, white);
+        margin: 2em;
+        text-decoration: none;
+        scale: 100%;
+        transition: scale 0.1s;
+    }
+
+    .show-hide:hover {
+        color: color-mix(in srgb, black 0%, white);
+        text-decoration: underline;
+        cursor: pointer;
+        scale: 105%;
+    }
+
+    .show-hide h2 {
+        font-family: 'TikTok Sans', Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: lighter;
+    }
+
+</style>

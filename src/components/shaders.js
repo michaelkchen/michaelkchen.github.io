@@ -12,11 +12,6 @@ const artColor = `${style.getPropertyValue('--art-color').trim()}`
 
 var rippleAnimation = null;
 
-console.log(defaultColor)
-
-// const defaultColor = 'rgb(82, 61, 97)' //'rgb(31, 8, 48)'
-// const softwareColor = 'rgb(8, 27, 48)'
-// const artColor = 'rgb(17, 8, 48)'
 var color = defaultColor;
 
 var components = [{
@@ -47,7 +42,6 @@ for (var i = 0; i < 6; i++) {
             radius: 0.25,
             softness: 0.2,
             visible: true,
-            // maskType: 'alphaInverted',
             center: {
                 type: 'mouse-position'
             }
