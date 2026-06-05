@@ -3,25 +3,26 @@ import { Image } from 'astro:assets'
 interface Props {
     id: string,
     path: string,
-    cols: number,
-    width: string
+    numRows: number,
+    height: string,
+    justify_content?: string
 }
-const { id, path, cols, width } = Astro.props
+const { id, path, numRows, height, justify_content } = Astro.props
 const data = import.meta.glob<{ default: ImageMetadata }>(`/src/assets/**/*.{jpeg,jpg,JPG,JPEG,png,PNG,gif}`, { eager: true })
 const images = Object.keys(data).filter(image => image.startsWith(path))
-const columns = [];
-for (var i = 0; i < cols; i++) {
-    columns[i] = Array()
+const rows = [];
+for (var i = 0; i < numRows; i++) {
+    rows[i] = Array()
 }
 for (var i = 0; i < images.length; i++) {
-    columns[i % cols].push(images[i])
+    rows[i % numRows].push(images[i])
 }
 ---
 
 <div class="gallery" id=`${id}-gallery`>
-    {columns.map(column => (
-        <div class="column">
-            {column.map(path => (
+    {rows.map(row => (
+        <div class="row">
+            {row.map(path => (
                 <Image src={data[path].default} alt="" width={data[path].default.width} height={data[path].default.height}/>
             ))}
         </div>
@@ -100,7 +101,7 @@ for (var i = 0; i < images.length; i++) {
     })
 </script>
 
-<style define:vars={{width: `${width}`}}>
+<style define:vars={{height: `${height}`, justify_content: `${justify_content ?? "start"}`}}>
 
     .nav-button {
         position: absolute;
@@ -135,24 +136,26 @@ for (var i = 0; i < images.length; i++) {
     .gallery {
         display: flex;
         flex-wrap: wrap;
-        flex-direction: row;
+        flex-direction: column;
         justify-items: center;
         justify-content: center;
+        overflow-x: auto;
         width: 100%;
     }
 
-    .column {
+    .row {
         display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        width: var(--width);
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: var(--justify_content);
+        height: var(--height);
         gap: 0.5em;
         margin: 0.25em;
     }
 
     .gallery img {
-        width: 100%;
-        height: auto;
+        width: auto;
+        height: 100%;
         border-radius: 1%;
         cursor: pointer;
         transition: scale 0.2s;
