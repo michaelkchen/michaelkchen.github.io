@@ -35,22 +35,33 @@ const { size } = Astro.props;
         if (sweProjects.length <= 3) {
             sweSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
         }
-        for (var i = 3; i < sweProjects.length; i++) {
-            (sweProjects?.item(i) as HTMLElement).style.setProperty('display', 'none');
+        for (var i = 0; i < sweProjects.length; i++) {
+            const card = (sweProjects?.item(i) as HTMLElement)
+            card.style.setProperty('display', (i < 3) ? 'flex' : 'none');
+            if (i < 3) {
+                requestAnimationFrame(() => {
+                    card.classList.remove('hide');
+                })
+            }
         }
     }
     if (artProjects) {
         if (artProjects.length <= 3) {
             artSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
         }
-        for (var i = 3; i < artProjects.length; i++) {
-            (artProjects?.item(i) as HTMLElement).style.setProperty('display', 'none');
+        for (var i = 0; i < artProjects.length; i++) {
+            const card = (artProjects?.item(i) as HTMLElement)
+            card.style.setProperty('display', (i < 3) ? 'flex' : 'none');
+            if (i < 3) {
+                requestAnimationFrame(() => {
+                    card.classList.remove('hide');
+                })
+            }
         }
     }
 
     showHides.forEach(showHide => {
         showHide.addEventListener('click', (e) => {
-            const h2 = showHide.querySelector('h2');
             if (showHide.classList.contains('hide')) {
                 showHide.classList.remove('hide');
                 showHide.classList.add('show');
@@ -65,7 +76,16 @@ const { size } = Astro.props;
             const projects = (artSection?.contains(showHide) && artProjects) || (sweSection?.contains(showHide) && sweProjects);
             if (projects) {
                 for (var i = 3; i < projects.length; i++) {
-                    (projects.item(i) as HTMLElement).style.setProperty('display', showHide.classList.contains('show') ? 'flex' : 'none');
+                    const card = (projects.item(i) as HTMLElement);
+                    if (showHide.classList.contains('show')) {
+                        card.style.setProperty('display', 'flex');
+                        requestAnimationFrame(() => {
+                            card.classList.remove('hide');
+                        })
+                    } else {
+                        card.classList.add('hide');
+                        card.style.setProperty('display', 'none');
+                    }
                 }
             }
             if (showHide.classList.contains('hide')) {
