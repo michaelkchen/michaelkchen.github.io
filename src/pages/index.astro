@@ -29,11 +29,34 @@ import { Content as Bio } from '../content/bio.md'
 <script src="../components/shaders.js"></script>
 
 <Layout>
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michael Chen</title>
 </head>
+<nav>
+    <button class="graphics", id="plasma">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <g fill="none">
+                <path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" />
+                <path fill="currentColor" d="M18.147 6.733a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.738-1.122.907-2.005.674l-2.19-.612Zm0 6a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.739-1.122.907-2.005.674l-2.19-.612Zm-5.954 6.8l.364-.14a10.6 10.6 0 0 1 5.59-.66l2.19.612c.882.233 1.635.065 2.005-.674a1.514 1.514 0 0 0-.673-2.013c-.947-.472-2.028-.73-3.066-.89a13.6 13.6 0 0 0-6.797.7l-.363.14c-2.202.88-4.172.878-5.59.66c-.634-.098-1.29-.243-1.893-.484l-.297-.13a1.5 1.5 0 0 0-1.334 2.688c.947.473 2.03.731 3.068.89c1.752.27 4.143.28 6.796-.7Z" />
+            </g>
+        </svg>
+    </button>
+    <button class="graphics", id="light">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path fill="currentColor" d="M12.9 21.95q-.225.05-.45.05H12q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12v.45q0 .225-.05.45L20 12.3V12q0-3.35-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20h.3zm7.625.55l-4.275-4.275L15 22l-3-10l10 3l-3.775 1.25l4.275 4.275z" />
+        </svg>
+    </button>
+    <button class="graphics", id="ripples">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 512 512">
+            <path d="M0 0h512v512H0z" fill="none" />
+            <path fill="currentColor" d="M490.594 16.5C475.867 89.867 453.31 155.58 422.5 214.063c-21.152 25.636-62.322 41.665-103.53 34.375c43.72-60.817 65.875-137.485 56.75-217.813c-16.566 59.05-35.182 107.876-58.876 150.063c-15.774 16.782-43.006 26.035-71.03 17.562c32.043-43.75 48.387-99.21 41.78-157.375c-10.346 33.145-23.852 63.82-40.313 92.094c-14.07 15.776-39.033 24.72-64.843 17.186c21.468-29.682 32.4-67.153 27.938-106.437c-8.185 18.823-17.562 36.73-28.063 53.718c-13.755 11.638-44.94 9.03-68.406.906l-1.03-.78c12.087-18.074 16.897-41.415 11.655-66.783a207 207 0 0 1-15.186 31.94c-10.587 17.13-38.888 3.862-57.5-8.782c15.907 14.915 32.82 40.912 17.375 58.53c-8.39 7.818-17.43 15.142-27.095 21.938c23.353-.655 43.408-8.87 58.125-22.22c22.488 19.768 27.623 50.15 16.688 65.876a424 424 0 0 1-40.657 34.188c37.302-4.225 69.916-21.612 93.75-47l1.407 1.125c11.843 22.98 8.502 48.584-3.718 65.188c-23.105 21.13-48.766 40.03-76.876 56.687c57.276-6.488 107.018-34.138 142.344-74.25l1.03.813c13.878 25.61 10.338 54.48-3.312 73.062c-35.078 31.465-77.614 59.935-130.312 88.625c80.3-9.095 150.015-47.894 199.437-104.22c19.344 39.258 12.064 82.842-10.25 109.47c-49.987 43.37-108.914 79.872-177.217 109.97C348.12 465.035 517.375 252.265 490.592 16.5z" />
+        </svg>
+    </button>
+</nav>
 <body>
     <canvas id="background"/>
     <header>
@@ -92,7 +115,7 @@ import { Content as Bio } from '../content/bio.md'
         </section>
     </div>
 
-    <a href="#" class="return">
+    <a href="#top" class="return">
         <div class="return-inner">
             <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
                 <path d="M0 0h1024v1024H0z" fill="none" />
@@ -122,6 +145,8 @@ import { Content as Bio } from '../content/bio.md'
         --link-color: rgb(33, 103, 255);
         --hover-color: #cdc4ff;
         --scroll-color: rgb(50, 50, 50);
+        --graphics-enabled: rgb(200, 200, 255);
+        --graphics-disabled: rgb(100, 0, 0);
         --scroll-width: 0.25rem;
     }
 
@@ -189,32 +214,54 @@ import { Content as Bio } from '../content/bio.md'
         font-size: 2.5em;
     }
 
+    nav:has(dialog[open]) {
+        overflow: hidden;
+        margin-right: 1.5em;
+    }
+
     nav {
-        margin: 1em auto 3em auto;
-        width: 100%;
-    }
-
-    nav ul {
         display: flex;
-        align-items: center;
-        list-style: none;
-        gap: 2em;
+        position: fixed;
+        top: 0;
+        justify-self: end;
+        margin: 1em;
+        width: auto;
+        background-color: rgba(10, 10, 10, 0.25);
+        border-style: solid;
+        border-color: var(--scroll-color);
+        border-width: 0.1em;
+        border-radius: 1.5em;
+        padding: 0 0.5em;
+        margin-right: calc(1.5em - (100vw - 100%));
+        pointer-events: all;
+        z-index: 10;
     }
 
-    nav li:first-child {
-        margin-right: auto;
-        font-family: Roboto, 'TikTok Sans';
-        font-weight: bold;
+    nav button {
+        background: none;
+        border-style: none;
+        border-width: 0.1em;
+        border-color: var(--scroll-color);
+        color: var(--graphics-enabled);
+        padding: 0.75em;
+        transition: color 0.2s;
     }
 
-    nav a {
-        text-decoration: none;
-        color: var(--text-color);
+    nav button svg {
+        transition: scale 0.2s, filter 0.2s;
     }
 
-    nav a:hover {
-        text-decoration: underline;
-        color: var(--hover-color);
+    nav button:hover svg {
+        scale: 120%;
+        filter: drop-shadow(0 0 0.1em var(--graphics-enabled));
+    }
+
+    nav button.disabled {
+        color: var(--graphics-disabled);
+    }
+
+    nav button.disabled:hover svg {
+        filter: drop-shadow(0 0 0.1em var(--graphics-disabled));
     }
 
     @media (prefers-reduced-motion: no-preference) {

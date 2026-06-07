@@ -10,20 +10,34 @@ const defaultColor = `${style.getPropertyValue('--resume-color').trim()}`
 const softwareColor = `${style.getPropertyValue('--swe-color').trim()}`
 const artColor = `${style.getPropertyValue('--art-color').trim()}`
 
+const NUM_LIGHTS = 6;
+
+var plasma = true;
+var light = true;
+var ripples = true;
+
 var rippleAnimation = null;
 
 var color = defaultColor;
 
 var components = [{
+    type: 'SolidColor',
+    id: 'bg',
+    props: {
+        color: color,
+        opacity: 0.8,
+    }, 
+}]
+components.push({
     type: 'Plasma',
-    id: 'liquid',
+    id: 'plasma',
     props: {
         colorA: color,
         colorB: 'rgb(1, 1, 1)',
         density: 1,
         warp: 0.4,
     }, 
-}]
+})
 components.push({
     type: 'CursorRipples',
     id: 'ripples',
@@ -33,7 +47,7 @@ components.push({
         intensity: 20,
     }
 })
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < NUM_LIGHTS; i++) {
     components.push({
         type: 'Circle',
         id: 'circle' + i,
@@ -76,17 +90,20 @@ observer.observe(software)
 observer.observe(art)
 
 addEventListener('mousedown', (e) => {
-    if (rippleAnimation != null && rippleAnimation.state === 'running') {
-        rippleAnimation.stop();
+    if (ripples) {
+        if (rippleAnimation != null && rippleAnimation.state === 'running') {
+            rippleAnimation.stop();
+        }
+        shader.update('ripples', {decay: 7.5, visible: true})
     }
-    shader.update('ripples', {decay: 7.5, visible: true})
 })
 addEventListener('mouseup', (e) => {
     rippleAnimation = animate(7.5, 100, {
         duration: 1,
         ease: 'easeOut',
         onUpdate: (latest) => {
-            shader.update('ripples', {decay: latest, visible: true})
+            if (ripples)
+                shader.update('ripples', {decay: latest})
         },
         onComplete: () => {
             shader.update('ripples', {visible: false})
@@ -100,8 +117,35 @@ async function crossColor(newColor) {
         ease: 'easeInOut',
         onUpdate: (latest) => {
             const rgb = latest.match(/\d+/g);
-            color = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
-            shader.update('liquid', {colorA: color})
+            var red = Number(rgb[0]);
+            var green = Number(rgb[1]);
+            var blue = Number(rgb[2]);
+            color = `rgb(${red}, ${green}, ${blue})`
+            shader.update('plasma', {colorA: color})
+            shader.update('bg', {color: color})
         }
     })
 }
+
+const plasmaButton = document.getElementById('plasma');
+plasmaButton.addEventListener('click', () => {
+    plasma = !plasma;
+    shader.update('plasma', {visible: plasma});
+    plasmaButton.classList.toggle('disabled');
+})
+
+const lightButton = document.getElementById('light');
+lightButton.addEventListener('click', () => {
+    light = !light;
+    for (var i = 0; i < NUM_LIGHTS; i++) {
+        shader.update(`circle${i}`, {opacity: light ? 1 : 0});
+    }
+    lightButton.classList.toggle('disabled');
+}) 
+
+const ripplesButton = document.getElementById('ripples');
+ripplesButton.addEventListener('click', () => {
+    ripples = !ripples;
+    shader.update('ripples', {visible: ripples});
+    ripplesButton.classList.toggle('disabled');
+})
