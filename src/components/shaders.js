@@ -113,7 +113,7 @@ addEventListener('mouseup', (e) => {
 
 window.addEventListener('resize', () => {
     const dpr = window.devicePixelRatio;
-    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.width = `calc(${window.innerWidth}px + 100vw - 100%)`;
     canvas.style.height = `${window.innerHeight}px`;
     canvas.width = Math.round(window.innerWidth * dpr);
     canvas.height = Math.round(window.innerHeight * dpr);

@@ -8,17 +8,19 @@ summary: "A week-long student-ran charity brodcast that raised over $1,600 for t
 ---
 import { Image } from 'astro:assets'
 import hfs_crew from '/src/assets/images/hfs crew.JPG'
-export const width = "300em"
-export const height = "168.75em"
-export const solo_width = "450em"
-export const solo_height = "253.125em"
+export const width = "300"
+export const height = "168.75"
+export const solo_width = "450"
+export const solo_height = "253.125"
 
 As a part of the organizer team for HackFromScratch as an editor, I produced multiple highlight reels for the event, which were posted on Instagram, YouTube, LinkedIn, Reddit, and X/Twitter. I focused on capturing the fun, lighthearted energy of the streams to captivate viewers into participating in the charity.
-
-<Image src={hfs_crew} width={width} height={height} alt="The crew of HackFromScratch." style="float: right; margin: 0.5em"/>
-
 <br/>
+
+<div style="overflow: auto">
+<Image src={hfs_crew} width={width} height={height} alt="The crew of HackFromScratch." style="float: right; margin: 0.5em"/>
 The brodcast itself consisted of 35 live streamed events which had a combined total of 48+ hours and over 1,000 unique viewers throughout the whole week. The whole series of events was initiated and led by my friend <a href="https://www.linkedin.com/in/alexander-kutulas/" target="_blank">Alexander Kutlas</a> with student clubs like Purdue Hackers, Purdue Music Producers, and others contributing work to the project, as well as sponsorships from Wabash Landing 9, Hyperkin, and more.
+</div>
+
 <br/>
 It also consisted of a creative jam, where the audience would submit work to compete for prizes for standing out in certain categories (Visualization, Mayhem, Audio Alchemist, etc).
 
@@ -30,7 +32,9 @@ Below are all the videos I contributed for the event:
 
 <iframe width={width} height={height} src="https://www.youtube.com/embed/i-0tqnvjAkU" title="Purdue Creatives Present: HackFromScratch" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <iframe width={width} height={height} src="https://www.youtube.com/embed/YclCZSAWVuU" title="HackFromScratch 2026 - Creative Jam Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<blockquote class="twitter-tweet" data-media-max-width="300"><p lang="en" dir="ltr">$1,000. Going directly to support child creativity in partnership with <a href="https://twitter.com/scratch?ref_src=twsrc%5Etfw">@scratch</a>.<br></br>I still can't believe we hit it.<br></br>Thank you so much to everyone who donated and tuned in this weekend! Attached is a quick recap of just some of the awesome things that happened.<br></br>You can catch us… <a href="https://t.co/ZTLTIJ26i1">pic.twitter.com/ZTLTIJ26i1</a></p>&mdash; Hack From Scratch (@HackFromScratch) <a href="https://twitter.com/HackFromScratch/status/2038728367042695170?ref_src=twsrc%5Etfw">March 30, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div width={width}>
+<blockquote class="twitter-tweet" data-media-max-width={`${width}`} width={width}><p lang="en" dir="ltr">$1,000. Going directly to support child creativity in partnership with <a href="https://twitter.com/scratch?ref_src=twsrc%5Etfw">@scratch</a>.<br></br>I still can't believe we hit it.<br></br>Thank you so much to everyone who donated and tuned in this weekend! Attached is a quick recap of just some of the awesome things that happened.<br></br>You can catch us… <a href="https://t.co/ZTLTIJ26i1">pic.twitter.com/ZTLTIJ26i1</a></p>&mdash; Hack From Scratch (@HackFromScratch) <a href="https://twitter.com/HackFromScratch/status/2038728367042695170?ref_src=twsrc%5Etfw">March 30, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
 
 </div>
 
