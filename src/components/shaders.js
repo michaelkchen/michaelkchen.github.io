@@ -117,7 +117,6 @@ window.addEventListener('resize', () => {
     canvas.style.height = `${window.innerHeight}px`;
     canvas.width = Math.round(window.innerWidth * dpr);
     canvas.height = Math.round(window.innerHeight * dpr);
-    console.log(canvas.style.getPropertyValue('width'), dpr)
 })
 
 const plasmaButton = document.getElementById('plasma');
