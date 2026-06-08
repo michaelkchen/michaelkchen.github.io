@@ -111,21 +111,14 @@ addEventListener('mouseup', (e) => {
     })
 })
 
-async function crossColor(newColor) {
-    await animate(color, newColor, {
-        duration: 0.5,
-        ease: 'easeInOut',
-        onUpdate: (latest) => {
-            const rgb = latest.match(/\d+/g);
-            var red = Number(rgb[0]);
-            var green = Number(rgb[1]);
-            var blue = Number(rgb[2]);
-            color = `rgb(${red}, ${green}, ${blue})`
-            shader.update('plasma', {colorA: color})
-            shader.update('bg', {color: color})
-        }
-    })
-}
+window.addEventListener('resize', () => {
+    const dpr = window.devicePixelRatio;
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+    canvas.width = Math.round(window.innerWidth * dpr);
+    canvas.height = Math.round(window.innerHeight * dpr);
+    console.log(canvas.style.getPropertyValue('width'), dpr)
+})
 
 const plasmaButton = document.getElementById('plasma');
 plasmaButton.addEventListener('click', () => {
@@ -149,3 +142,19 @@ ripplesButton.addEventListener('click', () => {
     shader.update('ripples', {visible: ripples});
     ripplesButton.classList.toggle('disabled');
 })
+
+async function crossColor(newColor) {
+    await animate(color, newColor, {
+        duration: 0.5,
+        ease: 'easeInOut',
+        onUpdate: (latest) => {
+            const rgb = latest.match(/\d+/g);
+            var red = Number(rgb[0]);
+            var green = Number(rgb[1]);
+            var blue = Number(rgb[2]);
+            color = `rgb(${red}, ${green}, ${blue})`
+            shader.update('plasma', {colorA: color})
+            shader.update('bg', {color: color})
+        }
+    })
+}
