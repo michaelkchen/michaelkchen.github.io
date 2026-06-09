@@ -21,10 +21,13 @@ var rippleAnimation = null;
 var color = defaultColor;
 
 var components = [{
-    type: 'SolidColor',
+    type: 'RadialGradient',
     id: 'bg',
     props: {
-        color: color,
+        visible: false,
+        colorA: color,
+        colorB: `rgb(1, 1, 1)`,
+        repeat: 0.8,
         opacity: 0.8,
     }, 
 }]
@@ -32,6 +35,7 @@ components.push({
     type: 'Plasma',
     id: 'plasma',
     props: {
+        visible: true,
         colorA: color,
         colorB: 'rgb(1, 1, 1)',
         density: 1,
@@ -123,6 +127,7 @@ const plasmaButton = document.getElementById('plasma');
 plasmaButton.addEventListener('click', () => {
     plasma = !plasma;
     shader.update('plasma', {visible: plasma});
+    shader.update('bg', {visible: !plasma});
     plasmaButton.classList.toggle('disabled');
 })
 
@@ -153,7 +158,7 @@ async function crossColor(newColor) {
             var blue = Number(rgb[2]);
             color = `rgb(${red}, ${green}, ${blue})`
             shader.update('plasma', {colorA: color})
-            shader.update('bg', {color: color})
+            shader.update('bg', {colorA: color})
         }
     })
 }
