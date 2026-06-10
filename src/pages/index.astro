@@ -4,6 +4,7 @@ import WorkCard from '../components/WorkCard.astro';
 import Layout from '../layouts/Layout.astro';
 
 import linkedIn from '../assets/images/linkedin.jpg';
+import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content';
 
 interface WorkCard {
@@ -26,7 +27,8 @@ const artWorks = works.filter(work => work.data.type == WORK_ART);
 const sweWorks = works.filter(work => work.data.type == WORK_SWE);
 import { Content as Bio } from '../content/bio.md'
 ---
-<script src="../components/shaders.js"></script>
+<script src="../scripts/shaders.js"/>
+<script src="../scripts/scrollAlt.js"/>
 
 <Layout>
 <head>
@@ -59,10 +61,10 @@ import { Content as Bio } from '../content/bio.md'
 </nav>
 <body>
     <canvas id="background"/>
-    <header>
+    <header class="hide">
         <div class="flex-container">
             <div class="flex-container profile-container">
-                <img height="width" width="300px" src={linkedIn.src}>
+                <Image src={linkedIn} alt="" style="width: 300px; height: auto"/>
                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                 <div class="social-container">
                     <a href="https://www.linkedin.com/in/~michaelchen/" class="social-button linkedin">
@@ -82,7 +84,7 @@ import { Content as Bio } from '../content/bio.md'
                     </a>
                 </div>
             </div>
-            <div class="text-container">
+            <div class="bio-container">
                 <Bio />
                 <a href="#software" class="cta-button swe">Software</a>
                 <a href="#art" class="cta-button art">Art/Media</a>
@@ -271,12 +273,10 @@ import { Content as Bio } from '../content/bio.md'
         section {
             position: relative;
             top: 0;
-            opacity: 100%;
-            margin: 0 auto;
+            scale: 1;
+            margin: 23vh auto;
             width: min(110em, 100%);
-            animation: fade-in ease-out backwards, fade-out ease-in forwards;
-            animation-timeline: view();
-            animation-range: entry 10rem, exit 10rem;
+            transition: opacity 1s, scale 1s;
         }
         header {
             position: relative;
@@ -284,9 +284,27 @@ import { Content as Bio } from '../content/bio.md'
             scale: 1;
             margin: 23vh auto 0 auto;
             width: min(110em, 100%);
-            animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
-            animation-timeline: auto, view();
-            animation-range: normal, exit -10rem;
+            transition: opacity 1s, scale 1s;
+        }
+        section.hide, header.hide {
+            opacity: 0;
+            scale: 0.95;
+        }
+        @supports (animation-timeline: view()) {
+            section {
+                margin: 0 auto;
+                opacity: 100%;
+                animation: fade-in ease-out backwards, fade-out ease-in forwards;
+                animation-timeline: view();
+                animation-range: entry 10rem, exit 10rem;
+                transition: none;
+            }
+            header {
+                animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
+                animation-timeline: auto, view();
+                animation-range: normal, exit -10rem;
+                transition: none;
+            }
         }
         @keyframes fade-in {
             from {opacity: 0%; top: 20rem; scale: 0.95}
@@ -337,12 +355,13 @@ import { Content as Bio } from '../content/bio.md'
         gap: 1em;
     }
 
-    .text-container {
+    .bio-container {
         flex: 0 1 34em;
+        margin: 0 1.5em;
     }
 
-    .text-container p {
-        margin: .75em 0 1em 0;
+    .bio-container p {
+        margin: .75em 0;
         font-size: 1.25rem;
     }
 
