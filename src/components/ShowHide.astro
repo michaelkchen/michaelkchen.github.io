@@ -61,40 +61,36 @@ const { size } = Astro.props;
     }
 
     showHides.forEach(showHide => {
-        showHide.addEventListener('click', (e) => {
-            if (showHide.classList.contains('hide')) {
-                showHide.classList.remove('hide');
-                showHide.classList.add('show');
-                showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'none');
-                showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'flex');
-            } else {
-                showHide.classList.add('hide');
-                showHide.classList.remove('show');
-                showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'flex');
-                showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'none');
-            }
-            const projects = (artSection?.contains(showHide) && artProjects) || (sweSection?.contains(showHide) && sweProjects);
-            if (projects) {
+        const projects = (artSection?.contains(showHide) && artProjects) || (sweSection?.contains(showHide) && sweProjects);
+        if (projects) {
+            showHide.addEventListener('click', (e) => {
+                showHide.classList.toggle('hide');
                 for (var i = 3; i < projects.length; i++) {
                     const card = (projects.item(i) as HTMLElement);
-                    if (showHide.classList.contains('show')) {
+                    if (showHide.classList.contains('hide')) {
+                        card.classList.add('hide');
+                        card.style.setProperty('display', 'none');
+                    } else {
                         card.style.setProperty('display', 'flex');
                         requestAnimationFrame(() => {
                             card.classList.remove('hide');
                         })
-                    } else {
-                        card.classList.add('hide');
-                        card.style.setProperty('display', 'none');
                     }
                 }
-            }
-            if (showHide.classList.contains('hide')) {
-                showHide.scrollIntoView({
-                    block: 'end'
-                });
-            }
-        })
+                if (showHide.classList.contains('hide')) {
+                    showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'flex');
+                    showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'none');
+                    showHide.scrollIntoView({
+                        block: 'end'
+                    });
+                } else {
+                    showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'none');
+                    showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'flex');
+                }
+            })
+        }
     })
+
 </script>
 
 <style>
