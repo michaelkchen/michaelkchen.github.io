@@ -1,9 +1,4 @@
 ---
-interface Props {
-    size: number;
-}
-const { size } = Astro.props;
-
 ---
 <button class="show-hide hide">
     <div class="up" style="display: none;">
@@ -12,7 +7,7 @@ const { size } = Astro.props;
             <path fill="currentColor" d="M6 17.59L7.41 19L12 14.42L16.59 19L18 17.59l-6-6z" />
             <path fill="currentColor" d="m6 11l1.41 1.41L12 7.83l4.59 4.58L18 11l-6-6z" />
         </svg>
-        <h2>Show {size-3} Less</h2>
+        <h2>Show Less</h2>
     </div>
     <div class="down" style="display: flex">
         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -20,44 +15,45 @@ const { size } = Astro.props;
             <path fill="currentColor" d="M18 6.41L16.59 5L12 9.58L7.41 5L6 6.41l6 6z" />
             <path fill="currentColor" d="m18 13l-1.41-1.41L12 16.17l-4.59-4.58L6 13l6 6z" />
         </svg>
-        <h2>Show {size-3} More</h2>
+        <h2>Show More</h2>
     </div>
 </button>
 
 <script>
+
     const sweSection = document.getElementById('software-section');
     const artSection = document.getElementById('art-section');
     const showHides = document.querySelectorAll('.show-hide');
     const sweProjects = sweSection?.querySelectorAll('.project-container');
     const artProjects = artSection?.querySelectorAll('.project-container');
 
+    resizeProjects(sweSection);
+    resizeProjects(artSection);
+
+    window.addEventListener('resize', () => {
+        resizeProjects(sweSection);
+        resizeProjects(artSection);
+    })
+
     if (sweProjects) {
-        if (sweProjects.length <= 3) {
-            sweSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
-        }
-        for (var i = 0; i < sweProjects.length; i++) {
-            const card = (sweProjects?.item(i) as HTMLElement)
-            card.style.setProperty('display', (i < 3) ? 'flex' : 'none');
-            if (i < 3) {
+        sweProjects.forEach(p => {
+            const card = p as HTMLElement;
+            if (!p.classList.contains('extra')) {
                 requestAnimationFrame(() => {
                     card.classList.remove('hide');
                 })
             }
-        }
+        })
     }
     if (artProjects) {
-        if (artProjects.length <= 3) {
-            artSection?.querySelector<HTMLButtonElement>('.show-hide')?.style.setProperty('display', 'none');
-        }
-        for (var i = 0; i < artProjects.length; i++) {
-            const card = (artProjects?.item(i) as HTMLElement)
-            card.style.setProperty('display', (i < 3) ? 'flex' : 'none');
-            if (i < 3) {
+        artProjects.forEach(p => {
+            const card = p as HTMLElement;
+            if (!p.classList.contains('extra')) {
                 requestAnimationFrame(() => {
                     card.classList.remove('hide');
                 })
             }
-        }
+        })
     }
 
     showHides.forEach(showHide => {
@@ -65,18 +61,22 @@ const { size } = Astro.props;
         if (projects) {
             showHide.addEventListener('click', (e) => {
                 showHide.classList.toggle('hide');
-                for (var i = 3; i < projects.length; i++) {
-                    const card = (projects.item(i) as HTMLElement);
-                    if (showHide.classList.contains('hide')) {
-                        card.classList.add('hide');
-                        card.style.setProperty('display', 'none');
-                    } else {
-                        card.style.setProperty('display', 'flex');
-                        requestAnimationFrame(() => {
-                            card.classList.remove('hide');
-                        })
+                projects.forEach(p => {
+                    const card = p as HTMLElement;
+                    if (card.classList.contains('extra')) {
+                        if (showHide.classList.contains('hide')) {
+                            card.classList.add('hide');
+                            card.style.setProperty('display', 'none');
+                        } else {
+                            card.style.setProperty('display', 'flex');
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    card.classList.remove('hide');
+                                })
+                            })
+                        }
                     }
-                }
+                })
                 if (showHide.classList.contains('hide')) {
                     showHide.querySelector<HTMLDivElement>('.down')?.style.setProperty('display', 'flex');
                     showHide.querySelector<HTMLDivElement>('.up')?.style.setProperty('display', 'none');
@@ -90,6 +90,45 @@ const { size } = Astro.props;
             })
         }
     })
+
+    function resizeProjects(section : HTMLElement | null) {
+        const projects = section?.querySelectorAll('.project-container');
+        const showHide = section?.querySelector('.show-hide') as HTMLElement;
+        if (projects) {
+            const first = projects?.item(0) as HTMLElement;
+            projects.forEach(p => (p as HTMLElement).style.setProperty('display', 'flex'));
+            var extra = 0;
+            projects.forEach(p => {
+                const card = p as HTMLElement;
+                if (card.offsetTop > first.offsetTop + 1) {
+                    card.classList.add('extra');
+                    extra++;
+                } else {
+                    card.classList.remove('extra');
+                }
+                if (section?.querySelector('.show-hide')?.classList.contains('hide')) {
+                    if (card.classList.contains('extra')) {
+                        card.style.setProperty('display', 'none');
+                        card.classList.add('hide');
+                    } else {
+                        card.style.setProperty('display', 'flex');
+                        card.classList.remove('hide');
+                    }
+                }
+            })
+            if (extra > 0) {
+                showHide.style.setProperty('display', 'flex');
+                const upText = showHide?.querySelector('.up')?.querySelector('h2');
+                const downText = showHide?.querySelector('.down')?.querySelector('h2');
+                if (upText)
+                    upText.textContent = `Show ${extra} Less`;
+                if (downText)
+                    downText.textContent = `Show ${extra} More`;
+            } else {
+                showHide.style.setProperty('display', 'none');
+            }
+        }
+    }
 
 </script>
 
