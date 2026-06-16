@@ -117,6 +117,8 @@ import { Content as Bio } from '../content/bio.md'
         </section>
     </div>
 
+</body>
+<footer>
     <a href="#top" class="return">
         <div class="return-inner">
             <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
@@ -126,10 +128,8 @@ import { Content as Bio } from '../content/bio.md'
             <h1>Back to Top!</h12>
         </div>
     </a>
-    <footer>
-        <p>© Michael Chen 2026</p>
-    </footer>
-</body>
+    <p>© Michael Chen 2026</p>
+</footer>
 </Layout>
 
 <style is:global>
@@ -164,8 +164,6 @@ import { Content as Bio } from '../content/bio.md'
 
     canvas {
         display: block;
-        top: 0;
-        left: 0;
         inset: 0;
         width: 100%;
         height: 100%;
@@ -174,14 +172,18 @@ import { Content as Bio } from '../content/bio.md'
     }
 
     footer {
-        justify-items: center;
-        background-color: var(--footer-color);
-        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
 
     footer p {
+        text-align: center;
+        background-color: var(--footer-color);
+        padding: 1em;
         color: gray;
-        font-size: 80%
+        font-size: 80%;
+        width: 100%;
     }
 
     html {
@@ -191,17 +193,16 @@ import { Content as Bio } from '../content/bio.md'
         scroll-behavior: smooth;
         scrollbar-color: var(--scroll-color) rgba(0, 0, 0, 0);
         scrollbar-width: thin;
+        scrollbar-gutter: stable;
         user-select: none;
     }
 
     body {
         background-color: transparent;
-        padding-left: calc(100vw - 100%);
     }
 
-    body:has(dialog[open]) {
+    html:has(dialog[open]) {
         overflow: hidden;
-        padding-left: 0;
     }
 
     h1, h2, h3 {
@@ -236,7 +237,6 @@ import { Content as Bio } from '../content/bio.md'
         border-width: 0.1em;
         border-radius: 1.5em;
         padding: 0 0.5em;
-        margin-right: calc(1vw - (100vw - 100%));
         pointer-events: all;
         z-index: 10;
     }
