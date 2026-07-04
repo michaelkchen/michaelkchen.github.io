@@ -148,17 +148,22 @@ ripplesButton.addEventListener('click', () => {
 })
 
 async function crossColor(newColor) {
+    console.log(color, newColor);
     await animate(color, newColor, {
         duration: 0.5,
         ease: 'easeInOut',
         onUpdate: (latest) => {
-            const rgb = latest.match(/\d+/g);
-            var red = Number(rgb[0]);
-            var green = Number(rgb[1]);
-            var blue = Number(rgb[2]);
-            color = `rgb(${red}, ${green}, ${blue})`
+            if (latest[0] == '#') {
+                color = latest;
+            } else {
+                const rgb = latest.match(/\d+/g);
+                var red = Number(rgb[0]);
+                var green = Number(rgb[1]);
+                var blue = Number(rgb[2]);
+                color = `rgb(${red}, ${green}, ${blue})`
+            }
             shader.update('plasma', {colorA: color})
             shader.update('bg', {colorA: color})
-        }
+        },
     })
 }

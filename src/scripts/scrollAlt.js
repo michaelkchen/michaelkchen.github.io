@@ -4,7 +4,6 @@ const supportsView = CSS.supports('animation-timeline', 'view()');
 if (prefersMotion.matches && !supportsView) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            console.log("change")
             if (entry.isIntersecting) {
                 entry.target.classList.remove('hide');
             } else {

@@ -29,109 +29,109 @@ import { Content as Bio } from '../content/bio.md'
 ---
 
 <Layout>
-<head>
-    <script src="../scripts/shaders.js"></script>
-    <script src="../scripts/scrollAlt.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Chen</title>
-</head>
-<nav>
-    <button class="graphics", id="plasma">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <g fill="none">
-                <path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" />
-                <path fill="currentColor" d="M18.147 6.733a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.738-1.122.907-2.005.674l-2.19-.612Zm0 6a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.739-1.122.907-2.005.674l-2.19-.612Zm-5.954 6.8l.364-.14a10.6 10.6 0 0 1 5.59-.66l2.19.612c.882.233 1.635.065 2.005-.674a1.514 1.514 0 0 0-.673-2.013c-.947-.472-2.028-.73-3.066-.89a13.6 13.6 0 0 0-6.797.7l-.363.14c-2.202.88-4.172.878-5.59.66c-.634-.098-1.29-.243-1.893-.484l-.297-.13a1.5 1.5 0 0 0-1.334 2.688c.947.473 2.03.731 3.068.89c1.752.27 4.143.28 6.796-.7Z" />
-            </g>
-        </svg>
-    </button>
-    <button class="graphics", id="light">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path fill="currentColor" d="M12.9 21.95q-.225.05-.45.05H12q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12v.45q0 .225-.05.45L20 12.3V12q0-3.35-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20h.3zm7.625.55l-4.275-4.275L15 22l-3-10l10 3l-3.775 1.25l4.275 4.275z" />
-        </svg>
-    </button>
-    <button class="graphics", id="ripples">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 512 512">
-            <path d="M0 0h512v512H0z" fill="none" />
-            <path fill="currentColor" d="M490.594 16.5C475.867 89.867 453.31 155.58 422.5 214.063c-21.152 25.636-62.322 41.665-103.53 34.375c43.72-60.817 65.875-137.485 56.75-217.813c-16.566 59.05-35.182 107.876-58.876 150.063c-15.774 16.782-43.006 26.035-71.03 17.562c32.043-43.75 48.387-99.21 41.78-157.375c-10.346 33.145-23.852 63.82-40.313 92.094c-14.07 15.776-39.033 24.72-64.843 17.186c21.468-29.682 32.4-67.153 27.938-106.437c-8.185 18.823-17.562 36.73-28.063 53.718c-13.755 11.638-44.94 9.03-68.406.906l-1.03-.78c12.087-18.074 16.897-41.415 11.655-66.783a207 207 0 0 1-15.186 31.94c-10.587 17.13-38.888 3.862-57.5-8.782c15.907 14.915 32.82 40.912 17.375 58.53c-8.39 7.818-17.43 15.142-27.095 21.938c23.353-.655 43.408-8.87 58.125-22.22c22.488 19.768 27.623 50.15 16.688 65.876a424 424 0 0 1-40.657 34.188c37.302-4.225 69.916-21.612 93.75-47l1.407 1.125c11.843 22.98 8.502 48.584-3.718 65.188c-23.105 21.13-48.766 40.03-76.876 56.687c57.276-6.488 107.018-34.138 142.344-74.25l1.03.813c13.878 25.61 10.338 54.48-3.312 73.062c-35.078 31.465-77.614 59.935-130.312 88.625c80.3-9.095 150.015-47.894 199.437-104.22c19.344 39.258 12.064 82.842-10.25 109.47c-49.987 43.37-108.914 79.872-177.217 109.97C348.12 465.035 517.375 252.265 490.592 16.5z" />
-        </svg>
-    </button>
-</nav>
-<body>
-    <canvas id="background"/>
-    <header class="hide">
-        <div class="flex-container">
-            <div class="flex-container profile-container">
-                <Image src={linkedIn} alt="" style="width: 300px; height: auto"/>
-                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                <div class="social-container">
-                    <a href="https://www.linkedin.com/in/~michaelchen/" class="social-button linkedin">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/michaelkchen" class="social-button github">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
-                        </svg>
-                    </a>
-                    <a href="mailto:mkchen91021@gmail.com" class="social-button email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22,5V9L12,13,2,9V5A1,1,0,0,1,3,4H21A1,1,0,0,1,22,5ZM2,11.154V19a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V11.154l-10,4Z"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="bio-container">
-                <Bio />
-                <div class="work-nav">
-                    <a href="#software" class="work-button swe">Software</a>
-                    <a href="#art" class="work-button art">Art/Media</a>
-                    <a href="resume.pdf" class="work-button resume" target="_blank">Resume</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div id="software">
-        <section id="software-section">
-            <div class="flex-container" style="flex-direction: column;">
-                <h1 style="margin: 2em">Software Experience</h1>
-                <div class="gallery-container">
-                    {sweWorks.map(work => <WorkCard work={work}/>)}
-                </div>
-                <ShowHide size={sweWorks.length}/>
-            </div>
-        </section>
-    </div>
-
-    <div id="art">
-        <section id="art-section">
-            <div class="flex-container" style="flex-direction: column;">
-                <h1 style="margin: 2em">Art/Media Projects</h1>
-                <div class="gallery-container">
-                    {artWorks.map(work => <WorkCard work={work}/>)}
-                </div>
-                <ShowHide size={artWorks.length}/>
-            </div>
-        </section>
-    </div>
-
-</body>
-<footer>
-    <a href="#top" class="return">
-        <div class="return-inner">
-            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
-                <path d="M0 0h1024v1024H0z" fill="none" />
-                <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
+    <head>
+        <script src="../scripts/shaders.js"></script>
+        <script src="../scripts/scrollAlt.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Michael Chen</title>
+    </head>
+    <nav>
+        <button class="graphics", id="plasma">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <g fill="none">
+                    <path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" />
+                    <path fill="currentColor" d="M18.147 6.733a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.738-1.122.907-2.005.674l-2.19-.612Zm0 6a10.6 10.6 0 0 0-5.244.528l-.346.132a13.6 13.6 0 0 1-7.16.84c-1.038-.16-2.12-.418-3.068-.891a1.5 1.5 0 0 1 1.202-2.745l.132.058c.682.32 1.45.499 2.19.613c1.344.206 3.183.22 5.244-.529l.346-.132a13.6 13.6 0 0 1 7.16-.84c1.038.16 2.119.419 3.066.89a1.514 1.514 0 0 1 .672 2.014c-.369.739-1.122.907-2.005.674l-2.19-.612Zm-5.954 6.8l.364-.14a10.6 10.6 0 0 1 5.59-.66l2.19.612c.882.233 1.635.065 2.005-.674a1.514 1.514 0 0 0-.673-2.013c-.947-.472-2.028-.73-3.066-.89a13.6 13.6 0 0 0-6.797.7l-.363.14c-2.202.88-4.172.878-5.59.66c-.634-.098-1.29-.243-1.893-.484l-.297-.13a1.5 1.5 0 0 0-1.334 2.688c.947.473 2.03.731 3.068.89c1.752.27 4.143.28 6.796-.7Z" />
+                </g>
             </svg>
-            <h1>Back to Top!</h1>
+        </button>
+        <button class="graphics", id="light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path fill="currentColor" d="M12.9 21.95q-.225.05-.45.05H12q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12v.45q0 .225-.05.45L20 12.3V12q0-3.35-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20h.3zm7.625.55l-4.275-4.275L15 22l-3-10l10 3l-3.775 1.25l4.275 4.275z" />
+            </svg>
+        </button>
+        <button class="graphics", id="ripples">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 512 512">
+                <path d="M0 0h512v512H0z" fill="none" />
+                <path fill="currentColor" d="M490.594 16.5C475.867 89.867 453.31 155.58 422.5 214.063c-21.152 25.636-62.322 41.665-103.53 34.375c43.72-60.817 65.875-137.485 56.75-217.813c-16.566 59.05-35.182 107.876-58.876 150.063c-15.774 16.782-43.006 26.035-71.03 17.562c32.043-43.75 48.387-99.21 41.78-157.375c-10.346 33.145-23.852 63.82-40.313 92.094c-14.07 15.776-39.033 24.72-64.843 17.186c21.468-29.682 32.4-67.153 27.938-106.437c-8.185 18.823-17.562 36.73-28.063 53.718c-13.755 11.638-44.94 9.03-68.406.906l-1.03-.78c12.087-18.074 16.897-41.415 11.655-66.783a207 207 0 0 1-15.186 31.94c-10.587 17.13-38.888 3.862-57.5-8.782c15.907 14.915 32.82 40.912 17.375 58.53c-8.39 7.818-17.43 15.142-27.095 21.938c23.353-.655 43.408-8.87 58.125-22.22c22.488 19.768 27.623 50.15 16.688 65.876a424 424 0 0 1-40.657 34.188c37.302-4.225 69.916-21.612 93.75-47l1.407 1.125c11.843 22.98 8.502 48.584-3.718 65.188c-23.105 21.13-48.766 40.03-76.876 56.687c57.276-6.488 107.018-34.138 142.344-74.25l1.03.813c13.878 25.61 10.338 54.48-3.312 73.062c-35.078 31.465-77.614 59.935-130.312 88.625c80.3-9.095 150.015-47.894 199.437-104.22c19.344 39.258 12.064 82.842-10.25 109.47c-49.987 43.37-108.914 79.872-177.217 109.97C348.12 465.035 517.375 252.265 490.592 16.5z" />
+            </svg>
+        </button>
+    </nav>
+    <body>
+        <canvas id="background"/>
+        <header class="hide">
+            <div class="flex-container">
+                <div class="flex-container profile-container">
+                    <Image src={linkedIn} alt="" style="width: 300px; height: auto"/>
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                    <div class="social-container">
+                        <a href="https://www.linkedin.com/in/~michaelchen/" class="social-button linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/michaelkchen" class="social-button github">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                            </svg>
+                        </a>
+                        <a href="mailto:mkchen91021@gmail.com" class="social-button email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22,5V9L12,13,2,9V5A1,1,0,0,1,3,4H21A1,1,0,0,1,22,5ZM2,11.154V19a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V11.154l-10,4Z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="bio-container">
+                    <Bio />
+                    <div class="work-nav">
+                        <a href="#software" class="work-button swe">Software</a>
+                        <a href="#art" class="work-button art">Art/Media</a>
+                        <a href="resume.pdf" class="work-button resume" target="_blank">Resume</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="software">
+            <section id="software-section">
+                <div class="flex-container" style="flex-direction: column;">
+                    <h1 style="margin: 2em">Software Experience</h1>
+                    <div class="gallery-container">
+                        {sweWorks.map(work => <WorkCard work={work}/>)}
+                    </div>
+                    <ShowHide size={sweWorks.length}/>
+                </div>
+            </section>
         </div>
-    </a>
-    <p>© Michael Chen 2026</p>
-</footer>
+
+        <div id="art">
+            <section id="art-section">
+                <div class="flex-container" style="flex-direction: column;">
+                    <h1 style="margin: 2em">Art/Media Projects</h1>
+                    <div class="gallery-container">
+                        {artWorks.map(work => <WorkCard work={work}/>)}
+                    </div>
+                    <ShowHide size={artWorks.length}/>
+                </div>
+            </section>
+        </div>
+
+    </body>
+    <footer>
+        <a href="#top" class="return">
+            <div class="return-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 1024 1024">
+                    <path d="M0 0h1024v1024H0z" fill="none" />
+                    <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
+                </svg>
+                <h1>Back to Top!</h1>
+            </div>
+        </a>
+        <p>© Michael Chen 2026</p>
+    </footer>
 </Layout>
 
 <style is:global>
@@ -140,9 +140,9 @@ import { Content as Bio } from '../content/bio.md'
 
     :root {
         --base-color: rgb(0, 0, 0);
-        --swe-color: rgb(34, 85, 140);
-        --art-color: rgb(48, 34, 140);
-        --resume-color: rgb(129, 34, 140);
+        --swe-color: #22558c;
+        --art-color: #30228c;
+        --resume-color: #81228c;
         --footer-color: color-mix(in srgb, var(--base-color), white 0%);
         --text-color: rgb(255, 255, 255);
         --text-color2: rgb(173, 173, 173);
@@ -295,14 +295,19 @@ import { Content as Bio } from '../content/bio.md'
         @supports (animation-timeline: view()) {
             section {
                 margin: 0 auto;
-                opacity: 100%;
-                animation: fade-in ease-out backwards, fade-out ease-in forwards;
+                animation-name: fade-in, fade-out;
+                animation-timing-function: ease-out, ease-in;
+                animation-fill-mode: backwards, forwards;
                 animation-timeline: view();
                 animation-range: entry 10rem, exit 10rem;
                 transition: none;
             }
             header {
-                animation: fade-in 1s ease-out 1s backwards, fade-out ease-in forwards;
+                animation-name: fade-in, fade-out;
+                animation-duration: 1s, auto;
+                animation-timing-function: ease-out, ease-in;
+                animation-delay: 1s, auto;
+                animation-fill-mode: backwards, forwards;
                 animation-timeline: auto, view();
                 animation-range: normal, exit -10rem;
                 transition: none;
