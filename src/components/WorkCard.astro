@@ -18,7 +18,7 @@ const color = work.data.type == "swe" ? 'var(--swe-color)' : 'var(--art-color)'
     <h3>{work.data.title}</h3>
     {(work.data.date.length > 0) && <h4>{work.data.date}</h4>}
     <p>{work.data.summary}</p>
-    <button class=`cta-button learn ${work.data.type}` id={`${work.id}-learn`}>Learn More</a>
+    <button class=`work-button learn ${work.data.type}` id={`${work.id}-learn`}>Learn More</button>
 </div>
 <dialog class="dialog" id=`${work.id}-dialog`>
     <div class="title">

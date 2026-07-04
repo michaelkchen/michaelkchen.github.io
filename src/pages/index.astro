@@ -86,9 +86,11 @@ import { Content as Bio } from '../content/bio.md'
             </div>
             <div class="bio-container">
                 <Bio />
-                <a href="#software" class="cta-button swe">Software</a>
-                <a href="#art" class="cta-button art">Art/Media</a>
-                <a href="resume.pdf" class="cta-button resume" target="_blank">Resume</a>
+                <div class="work-nav">
+                    <a href="#software" class="work-button swe">Software</a>
+                    <a href="#art" class="work-button art">Art/Media</a>
+                    <a href="resume.pdf" class="work-button resume" target="_blank">Resume</a>
+                </div>
             </div>
         </div>
     </header>
@@ -125,7 +127,7 @@ import { Content as Bio } from '../content/bio.md'
                 <path d="M0 0h1024v1024H0z" fill="none" />
                 <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
             </svg>
-            <h1>Back to Top!</h12>
+            <h1>Back to Top!</h1>
         </div>
     </a>
     <p>© Michael Chen 2026</p>
@@ -365,6 +367,11 @@ import { Content as Bio } from '../content/bio.md'
         font-size: 1.25rem;
     }
 
+    .work-nav {
+        display: flex;
+        gap: 0.3em;
+    }
+
     .swe {
         background-color: color-mix(in srgb, var(--swe-color) 50%, transparent)
     }
@@ -377,7 +384,7 @@ import { Content as Bio } from '../content/bio.md'
         background-color: color-mix(in srgb, var(--resume-color) 50%, transparent)
     }
 
-    .cta-button {
+    .work-button {
         display: inline-block;
         text-decoration: none;
         color:white;
@@ -400,7 +407,7 @@ import { Content as Bio } from '../content/bio.md'
         box-shadow: 0em 0em 1em var(--resume-color)
     }
 
-    .cta-button:hover {
+    .work-button:hover {
         scale: 95%;
         filter: brightness(200%) saturate(200%)
     }

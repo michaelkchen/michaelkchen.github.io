@@ -23,7 +23,7 @@ for (var i = 0; i < images.length; i++) {
     {rows.map(row => (
         <div class="row">
             {row.map(path => (
-                <Image src={data[path].default} alt="" width={data[path].default.width} height={data[path].default.height}/>
+                <Image src={data[path].default} alt="" width={data[path].default.width} height={data[path].default.height} loading="lazy"/>
             ))}
         </div>
     ))}
