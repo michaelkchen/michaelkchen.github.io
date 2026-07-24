@@ -148,7 +148,6 @@ ripplesButton.addEventListener('click', () => {
 })
 
 async function crossColor(newColor) {
-    console.log(color, newColor);
     await animate(color, newColor, {
         duration: 0.5,
         ease: 'easeInOut',

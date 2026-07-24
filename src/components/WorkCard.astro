@@ -14,7 +14,7 @@ const color = work.data.type == "swe" ? 'var(--swe-color)' : 'var(--art-color)'
 ---
 
 <div style={`--color: ${color}`} class="project-container hide">
-    <Image src={images[matchedKey].default} alt="" style="width: 100%; height: auto; border-radius: 1%"/>
+    <Image src={images[matchedKey].default} width="400" alt="" style="width: 100%; height: auto; border-radius: 1%"/>
     <h3>{work.data.title}</h3>
     {(work.data.date.length > 0) && <h4>{work.data.date}</h4>}
     <p>{work.data.summary}</p>

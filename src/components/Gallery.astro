@@ -1,10 +1,10 @@
 ---
-import { Image } from 'astro:assets'
+import { Image, getImage } from 'astro:assets'
 interface Props {
     id: string,
     path: string,
     numRows: number,
-    height: string,
+    height: number,
     justify_content?: string
 }
 const { id, path, numRows, height, justify_content } = Astro.props
@@ -17,13 +17,29 @@ for (var i = 0; i < numRows; i++) {
 for (var i = 0; i < images.length; i++) {
     rows[i % numRows].push(images[i])
 }
+const fullSrcs: Record<string, string> = {}
+for (const p of images) {
+    const meta = data[p].default
+    const full = await getImage({ src: meta, format: 'webp' })
+    fullSrcs[p] = full.src
+}
 ---
 
 <div class="gallery" id=`${id}-gallery`>
     {rows.map(row => (
         <div class="row">
             {row.map(path => (
-                <Image src={data[path].default} alt="" width={data[path].default.width} height={data[path].default.height} loading="lazy"/>
+                <Image
+                    src={data[path].default}
+                    alt=""
+                    width={data[path].default.width / data[path].default.height * height}
+                    height={height}
+                    format="webp"
+                    loading="lazy"
+                    decoding="async"
+                    quality={50}
+                    full-src={fullSrcs[path]}
+                />
             ))}
         </div>
     ))}
@@ -67,7 +83,7 @@ for (var i = 0; i < images.length; i++) {
             const img = document.createElement('img');
             img.classList.add('show');
             imagesDiv.appendChild(img);
-            img.src = image.src;
+            img.src = image.getAttribute('full-src') || image.src
             lightbox.showModal();
             lightbox.classList.add('show');
             index = Array.from(images).indexOf(image);
@@ -99,7 +115,7 @@ for (var i = 0; i < images.length; i++) {
         const oldImg = imagesDiv.querySelector('img');
         const newImg = document.createElement('img');
         index = index == 0 ? images.length - 1 : index - 1;
-        newImg.src = images[index].src;
+        newImg.src = images[index].getAttribute('full-src') || images[index].src;
         swapImage(oldImg, newImg);
     })
     right.addEventListener('click', () => {
@@ -107,7 +123,7 @@ for (var i = 0; i < images.length; i++) {
         const oldImg = imagesDiv.querySelector('img');
         const newImg = document.createElement('img');
         index = (index + 1) % images.length;
-        newImg.src = images[index].src;
+        newImg.src = images[index].getAttribute('full-src') || images[index].src;
         swapImage(oldImg, newImg);
     })
     function swapImage(oldImg, newImg) {
@@ -126,7 +142,7 @@ for (var i = 0; i < images.length; i++) {
     }
 </script>
 
-<style define:vars={{height: `${height}`, justify_content: `${justify_content ?? "start"}`}}>
+<style define:vars={{height: `${height}px`, justify_content: `${justify_content ?? "start"}`}}>
 
     .nav-button {
         position: absolute;

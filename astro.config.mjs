@@ -6,5 +6,8 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://michaelkchen.github.io/',
-  integrations: [mdx()]
+  integrations: [mdx()],
+  image: {
+    responsiveStyles: true
+  }
 });
