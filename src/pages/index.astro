@@ -134,6 +134,13 @@ import { Content as Bio } from '../content/bio.md'
     </footer>
 </Layout>
 
+<script>
+    const header = document.querySelector('header');
+    window.addEventListener('load', () => {
+        header?.classList.remove('hide');
+    })
+</script>
+
 <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
@@ -306,11 +313,14 @@ import { Content as Bio } from '../content/bio.md'
                 animation-name: fade-in, fade-out;
                 animation-duration: 1s, auto;
                 animation-timing-function: ease-out, ease-in;
-                animation-delay: 1s;
                 animation-fill-mode: backwards, forwards;
                 animation-timeline: auto, view();
                 animation-range: normal, exit -10rem;
                 transition: none;
+                animation-play-state: running;
+            }
+            header.hide {
+                animation-play-state: paused;
             }
         }
         @keyframes fade-in {

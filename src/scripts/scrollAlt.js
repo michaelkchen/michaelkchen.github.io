@@ -19,4 +19,3 @@ if (prefersMotion.matches && !supportsView) {
         observer.observe(section);
     })
 }
-document.querySelector('header').classList.remove('hide')
