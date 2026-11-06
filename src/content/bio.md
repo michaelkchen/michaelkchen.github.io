@@ -1,6 +1,6 @@
 # Hi! I'm Michael Chen #  
 
-I am a undergraduate at Purdue University pursuing a bachelors in Computer Science, concentrating in Computer Graphics & Visualization + Machine Intelligence, and a minor in Art & Design Studio, focusing on Photography. I am also currently a Software Engineer Intern at Itron.  
+I am a undergraduate at Purdue University pursuing a bachelors in Computer Science, concentrating in Computer Graphics & Visualization + Machine Intelligence, and a minor in Art & Design Studio, focusing on Photography. I am also currently working part-time as a Software Engineer Intern at Itron.  
 
 As a computer scientist, I deal with back-end software, cloud applications, and I am currently experimenting with machine learning and front-end development.  
 
